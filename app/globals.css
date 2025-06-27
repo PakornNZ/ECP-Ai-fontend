@@ -1,0 +1,224 @@
+:root {
+  --font-Notosans: "Noto Sans Thai", apple-system, sans-serif;
+  --font-Inter: "Inter", apple-system, sans-serif;
+}
+
+@media (prefers-color-scheme: light) {
+  html[data-theme="system"] {
+    --background: #ffffff;
+    --object: #f7f7f7;
+    --object-fade: #e6e6e6e7;
+    --object-secondary: #3b3b3b;
+    --object-secondary-fade: #333333e0;
+    --stroke: #E8E8E8;
+    --color-main: #F87316;
+    --color-main-fade: #ff842c;
+    --color-secondary: #747474;
+    --color-font: #3b3b3b;
+    --color-font-fade: #333333e0;
+    --color-font-white: #fff;
+    --color-drop-shadow: #5252523d;
+    --color-loading: #b6b6b64d;
+    --color-loading-fade: #eeeeee8c;
+    --color-alert: #ff0000;
+  }
+
+  html[data-theme="dark"] {
+    --background: #232323;
+    --object: #1B1B1B;
+    --object-fade: #131111e0;
+    --object-secondary: #3b3b3b;
+    --object-secondary-fade: #333333e0;
+    --stroke: #474747;
+    --color-main: #F87316;
+    --color-main-fade: #ff842c;
+    --color-secondary: #c7c7c7;
+    --color-font: #e7e7e7;
+    --color-font-fade: #dbdbdb;
+    --color-font-white: #fff;
+    --color-drop-shadow: #5c5c5c5b;
+    --color-loading: #b6b6b628;
+    --color-loading-fade: #eeeeee59;
+    --color-alert: #ff0000;
+  }
+
+  html[data-theme="light"] {
+    --background: #ffffff;
+    --object: #f7f7f7;
+    --object-fade: #e6e6e6e7;
+    --object-secondary: #3b3b3b;
+    --object-secondary-fade: #333333e0;
+    --stroke: #E8E8E8;
+    --color-main: #F87316;
+    --color-main-fade: #ff842c;
+    --color-secondary: #747474;
+    --color-font: #3b3b3b;
+    --color-font-fade: #333333e0;
+    --color-font-white: #fff;
+    --color-drop-shadow: #52525223;
+    --color-loading: #b6b6b64d;
+    --color-loading-fade: #eeeeee8c;
+    --color-alert: #ff0000;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  html[data-theme="system"] {
+    --background: #232323;
+    --object: #1B1B1B;
+    --object-fade: #131111e0;
+    --object-secondary: #3b3b3b;
+    --object-secondary-fade: #333333e0;
+    --stroke: #474747;
+    --color-main: #F87316;
+    --color-main-fade: #ff842c;
+    --color-secondary: #c7c7c7;
+    --color-font: #e7e7e7;
+    --color-font-fade: #dbdbdb;
+    --color-font-white: #fff;
+    --color-drop-shadow: #5c5c5c5b;
+    --color-loading: #b6b6b628;
+    --color-loading-fade: #eeeeee59;
+    --color-alert: #ff0000;
+  }
+
+  html[data-theme="dark"] {
+    --background: #232323;
+    --object: #1B1B1B;
+    --object-fade: #131111e0;
+    --object-secondary: #3b3b3b;
+    --object-secondary-fade: #333333e0;
+    --stroke: #474747;
+    --color-main: #F87316;
+    --color-main-fade: #ff842c;
+    --color-secondary: #c7c7c7;
+    --color-font: #e7e7e7;
+    --color-font-fade: #dbdbdb;
+    --color-font-white: #fff;
+    --color-drop-shadow: #5c5c5c5b;
+    --color-loading: #b6b6b628;
+    --color-loading-fade: #eeeeee59;
+    --color-alert: #ff0000;
+  }
+
+  html[data-theme="light"] {
+    --background: #ffffff;
+    --object: #f7f7f7;
+    --object-fade: #e6e6e6e7;
+    --object-secondary: #3b3b3b;
+    --object-secondary-fade: #333333e0;
+    --stroke: #E8E8E8;
+    --color-main: #F87316;
+    --color-main-fade: #ff842c;
+    --color-secondary: #747474;
+    --color-font: #3b3b3b;
+    --color-font-fade: #333333e0;
+    --color-font-white: #fff;
+    --color-drop-shadow: #5252523d;
+    --color-loading: #b6b6b64d;
+    --color-loading-fade: #eeeeee8c;
+    --color-alert: #ff0000;
+  }
+}
+
+body {
+  background: var(--background);
+  margin: 0;
+}
+
+body input[type="text"], 
+body input[type="password"] {
+  cursor: text;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+body button[type="button"] {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+body table {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+
+body svg {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+body button[type="button"]:disabled {
+  background: var(--color-drop-shadow);
+  cursor: default;
+
+  transition: all 0.3s ease-in-out;
+}
+
+[left-title]:hover::after, 
+[right-title]:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+[left-title]:after {
+  content: attr(left-title);
+  position: absolute;
+  bottom: -25px;
+  left: 10%;
+  background: var(--object-secondary);
+  filter: opacity(80%);
+  color: var(--color-font-white);
+  font-size: 11px;
+  border-radius: 7px;
+  padding: 3px 7px;
+  white-space: nowrap; 
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.1s ease-in-out, visibility 0.1s ease-in-out, transform 0.1s ease-in-out;
+}
+
+[right-title]:after {
+  content: attr(right-title);
+  position: absolute;
+  bottom: -25px;
+  right: 10%;
+  background: var(--object-secondary);
+  filter: opacity(80%);
+  color: var(--color-font-white);
+  font-size: 11px;
+  border-radius: 7px;
+  padding: 3px 7px;
+  white-space: nowrap; 
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.1s ease-in-out, visibility 0.1s ease-in-out, transform 0.1s ease-in-out;
+}
+
+/* * Loading */
+.skeleton {
+  border-radius: 6px;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+.skeleton-text {
+  width: 100%;
+  height: 20px;
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+@keyframes skeleton-loading {
+  0% {
+      background-color: var(--color-loading);
+  }
+  100% {
+      background-color: var(--color-loading-fade);
+  }
+}

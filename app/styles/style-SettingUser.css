@@ -1,0 +1,47 @@
+.setting-popup {
+    z-index: 2;
+    position: absolute;
+    right: -15%;
+    top: 110%;
+}
+
+.setting-menu {
+    font-family: var(--font-Notosans);
+    background: var(--object-secondary);
+    padding: 3px;
+    border-radius: 8px;
+    border: 1px solid var(--stroke);
+}
+
+.setting-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--color-font-white);
+}
+
+.setting-menu li {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    padding: 4px 7px;
+    margin: 2px 0;
+    white-space: nowrap;
+}
+
+.setting-menu svg {
+    width: 14px;
+    height: 14px;
+    margin-right: 15px;
+}
+
+.setting-menu .logout-list:hover {
+    color: var(--color-alert);
+}
+
+.setting-menu li:hover {
+    background: var(--object-secondary-fade);
+}

@@ -1,0 +1,569 @@
+.section-ps {
+    display: grid;
+    place-items: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    background: var(--object);
+    overflow: hidden;
+    position: relative;
+}
+
+/* * รูปพื้นหลัง */
+.backdrop-logo {
+    z-index: 0;
+    position: absolute;
+    width: 900px;
+    height: 900px;
+    object-fit: fill;
+    right: 0;
+    bottom: 0;
+    transform: translate(25%, 25%);
+    opacity: 0.1;
+}
+
+/* * ฟอร์มทั้งหมด */
+.section-bg {
+    z-index: 1;
+    position: relative;
+    display: grid;
+    grid-template-columns: 4fr 5fr;
+    border-radius: 20px;
+    background: var(--background);
+    border: 1px solid var(--stroke);
+    filter: drop-shadow(0 0 6px var(--color-drop-shadow));
+    overflow: hidden;
+    width: 810px;
+
+    transition: all 0.3s ease-in-out;
+}
+
+/* * เคลียร์ปุ่ม */
+.section-bg button {
+    all: unset;
+}
+
+/* * โลโก้ */
+.section-logo {
+    z-index: 1;
+    font-family: var(--font-Inter);
+    background: var(--color-main);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px 0 0 20px;
+}
+
+.section-logo img {
+    width: 180px;
+    height: 180px;
+    object-fit: fill;
+    margin-bottom: 10px;
+    background: var(--color-main);
+    border-radius: 15px;
+    padding: 5px;
+}
+
+.section-logo h1 {
+    color: var(--color-font-white);
+    font-size: 42px;
+    margin: 0;
+}
+
+/* * เลื่อนฟอร์มเมื่อกด register */
+.section-data.register .form-container {
+    transform: translateX(-50%);
+}
+
+/* * ฟอร์ม */
+.form-container {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+}
+
+.section-data {
+    font-family: var(--font-Notosans);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+}
+
+/* * ส่วนของ signin และ signup */
+.section-signin,
+.section-signup {
+    flex-shrink: 0;
+    padding: 40px 50px;
+    position: relative;
+}
+
+.section-data h1 {
+    font-weight: 700;
+    font-size: 34px;
+    color: var(--color-main);
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.form-data{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    overflow: hidden;
+    height: 115px;
+
+    transition: all 0.3s ease-in-out;
+}
+
+.form-data-rg {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    overflow: hidden;
+}
+
+.form-data.next {
+    height: 230px;
+}
+
+.form-data.next span {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 5px 5px 0 auto;
+    cursor: pointer;
+    text-decoration: underline;
+    color: var(--color-font);
+    display: inline-block;
+    width: fit-content;
+}
+
+.form-data.next span:hover {
+    color: var(--color-main);
+}
+
+.form-data .input-container,
+.form-data-rg .input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 350px;
+}
+
+.form-data-rg .input-ps {
+    margin-bottom: 20px;
+}
+
+.input-ps .recheck-ps {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    margin-top: 5px;
+}
+
+.recheck-ps span {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--color-font-fade);
+
+    transition: all 0.3s ease-in-out;
+}
+
+.input-container button {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    margin: 8px;
+
+    opacity: 0;
+    visibility: hidden;
+}
+
+.input-container svg {
+    width: 16px;
+    height: 16px;
+    color: var(--color-main);
+}
+
+.input-container input {
+    all: unset;
+    flex-grow: 1;
+    padding: 8px 30px 8px 10px;
+    margin: 0;
+    border: 2px solid var(--stroke);
+    border-radius: 8px;
+    font-size: 16px;
+    color: var(--color-font);
+
+    transition: all 0.3s ease-in-out;
+}
+
+.form-container input[type="password"]::-ms-reveal {
+    display: none;
+}
+
+.form-container input::placeholder {
+    color: var(--color-secondary);
+    font-size: 14px;
+}
+
+.form-container input:focus, .form-container input:hover {
+    outline: none;
+    border: 2px solid var(--color-main);
+}
+
+.input-container:hover button,
+.input-container:focus-within button {
+    opacity: 1;
+    visibility: visible;
+}
+
+.form-data p svg,
+.form-data-rg p svg {
+    width: 16px;
+    height: 16px;
+    color: var(--color-main);
+    margin-right: 5px;
+}
+
+.form-data p,
+.form-data-rg p {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: var(--color-main);
+    font-weight: 400;
+    margin: 5px 0;
+    padding: 0;
+    padding-left: 10px;
+}
+
+.form-data p {
+    margin-top: 20px;
+}
+
+.form-data-rg p {
+    margin-top: 0px;
+
+    transition: margin-top 0.3s ease-in-out;
+}
+
+.section-data.register .form-data-rg p {
+    margin-top: 20px;
+}
+
+.form-data-rg .input-ps h5 {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: var(--color-main);
+    font-weight: 400;
+    padding: 0;
+    padding-left: 10px;
+    margin: 5px 0;
+}
+
+.form-data-rg h5 svg {
+    width: 16px;
+    height: 16px;
+    color: var(--color-main);
+    margin-right: 5px;
+}
+
+/* * ปุ่มถัดไป */
+.section-data .form-bt {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: var(--color-main);
+    color: var(--color-font-white);
+    border-radius: 20px;
+    padding: 3px;
+    margin: 0 auto;
+    overflow: hidden;
+    
+    transition: all 0.3s ease-in-out;
+}
+
+.form-bt span {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: unset;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.section-data .form-bt svg {
+    position: absolute;
+    bottom: 50%;
+    right: 50%;
+    transform: translate(50%, 50%);
+    width: 28px;
+    height: 28px;
+    transition: all 0.3s ease-in-out;
+}
+
+.section-data .form-bt:hover {
+    width: 50%;
+    border-radius: 8px;
+}
+
+.section-data .form-bt:hover span {
+    opacity: 1;
+}
+
+.section-data .form-bt:hover svg {
+    transform: translate(0, 50%);
+    right: 0;
+    margin-right: 5px;
+    border-radius: 5px;
+    color: var(--color-main);
+    background: var(--color-font-white);
+}
+
+/* * เปลี่ยนปุ่มถัดไป เป็น ปุ่มมเข้าสู่ระบบ */
+.section-data .form-bt.submit {
+    width: 50%;
+    border-radius: 8px;
+}
+
+/* * หรือ */
+.select-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0 30px 0;
+    position: relative;
+}
+
+.select-login hr {
+    background: var(--color-secondary);
+    margin: 0;
+    width: 100%;
+    height: 1px;
+    border: 0;
+}
+
+.select-login span {
+    padding: 0 10px;
+    font-size: 14px;
+    color: var(--color-secondary);
+}
+
+/* * ปุ่มเข้าสู่ระบบ */
+.section-login-bt {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 40px;
+    gap: 12px;
+}
+
+.section-login-bt button {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    padding: 5px 0;
+    padding-left: 20px;
+    font-size: 15px;
+    border: 1px solid var(--stroke);
+    filter: drop-shadow(0 0 3px var(--color-drop-shadow));
+}
+
+.section-login-bt img {
+    width: 20px;
+    height: 20px;
+    margin: 5px 0;
+    margin-right: 20px;
+}
+
+.section-login-bt .google-bt, .section-login-bt .line-bt {
+    background: var(--object);
+    color: var(--color-font);
+}
+
+.section-login-bt .google-bt:hover, .section-login-bt .line-bt:hover {
+    background: var(--stroke);
+}
+
+.section-signin .register-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    color: var(--color-font);
+    font-size: 14px;
+}
+
+.section-signin .register-bt {
+    margin-left: 5px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.section-signin .register-bt:hover {
+    color: var(--color-main-fade);
+}
+
+/* * ปุ่มกดย้อนกลับไปหน้า login */
+.section-signup .undo-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 8px;
+    background: var(--object);
+    border: 1px solid var(--stroke);
+}
+
+.section-signup .undo-section svg {
+    width: 18px;
+    height: 18px;
+    color: var(--color-font);
+}
+
+.section-signup .undo-section:hover {
+    background: var(--stroke);
+}
+
+/* * เพิ่มเติมหน้า register */
+.input-ps {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-ps .input-check {
+    all: unset;
+    flex-grow: 1;
+    padding: 8px 30px 8px 10px;
+    margin: 0;
+    border: 2px solid var(--stroke);
+    border-radius: 8px;
+    font-size: 16px;
+    color: var(--color-font);
+    cursor: pointer;
+}
+
+/* * ปุ่มยืนยันการลงทะเบียน */
+.section-signup .submit-register {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--color-main);
+    color: var(--color-font-white);
+    border-radius: 8px;
+    margin: 0 auto;
+    font-size: 15px;
+
+    transition: all 0.3s ease-in-out;
+}
+
+.section-signup .submit-register.active {
+    padding: 8.5px 0;
+}
+
+
+
+
+@media (max-width: 1024px) {
+    /* .section-bg {
+        
+    } */
+}
+
+@media (max-width: 768px) {
+    
+    /* * ขนาดมือถือ */
+    .section-ps {
+        display: flex;
+        place-items: unset;
+    }
+
+    .section-bg {
+        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+    }
+
+    /* * โลโก้ด้านบน */
+    .section-logo {
+        padding: 20px;
+        flex-direction: row;
+        background: var(--background);
+    }
+
+    .section-logo img {
+        width: 50px;
+        height: 50px;
+        object-fit: fill;
+        margin: 0;
+    }
+
+    .section-logo h1 {
+        color: var(--color-main);
+        font-weight: 800;
+        margin-left: 20px;
+    }
+
+    /* * เลื่อนฟอร์มเมื่อกด register */
+    .section-data.register .form-container {
+        transform: translateX(-50%);
+    }
+
+    /* * ส่วนของ signin และ signup */
+    .section-signin,
+    .section-signup {
+        width: 100vw;
+        padding: 0;
+    }
+
+    .section-data h1 {
+        font-size: 25px;
+        font-weight: 600;
+        margin: 20px 0 0 20px;
+        padding: 0;
+    }
+
+    /* * ฟอร์ม */
+    .form-data {
+        margin: 0 20px;
+    }
+    
+    .form-data-rg {
+        margin: 0 20px;
+    }
+
+    .form-data .input-container,
+    .form-data-rg .input-container {
+        width: 100%;
+    }
+
+    /* * หรือ */
+    .select-login {
+        margin: 20px 20px;
+    }
+
+    /* * ปุ่มกดย้อนกลับไปหน้า login */
+    .section-signup .undo-section {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin: 0 10px;
+        padding: 5px 20px;
+    }
+}

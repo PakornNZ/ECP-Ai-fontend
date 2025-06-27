@@ -1,0 +1,288 @@
+.flip-photo {
+    transform: scaleX(-1);
+}
+
+/* *Silebar */
+.silebar {
+    width: 0;
+    height: 100vh;
+    position: relative;
+    transition: width 0.3s ease-in-out;
+}
+
+.silebar:has(.sidebar-open) {
+    width: 250px;
+}
+
+.sidebar-bg {
+    z-index: 4;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: var(--object);
+    font-family: var(--font-Notosans);
+    height: 100vh;
+    width: 250px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-open {
+    transform: translateX(0);
+}
+
+.sidebar-bg-1 {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    padding-bottom: 10px;
+}
+
+.sidebar-bg-1 button {
+    all: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-font);
+    border-radius: 8px;
+    width: 23px;
+    height: 23px;
+    margin: auto;
+    position: relative;
+    padding: 3px;
+    
+    transition: all 0.3s ease-in-out;
+}
+
+.sidebar-bg-1 button:hover {
+    background: var(--object-fade);
+}
+
+.sidebar-search {
+    display: flex;
+    gap: 15px;
+}
+
+.sidebar-bg h1 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-main);
+}
+
+/* *chat-history */
+.history-chat {
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-bottom: 20px;
+    padding: 0 10px;
+    position: relative;
+}
+
+.history-chat::-webkit-scrollbar {
+    width: 3px;
+    background: transparent;
+}
+
+.history-chat:hover::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 10px;
+
+    transition: all 0.3s ease-in-out;
+}
+
+.history-chat:hover::-webkit-scrollbar-thumb {
+    background: var(--color-secondary);
+}
+
+.history-chat h2 {
+    margin: 0;
+    padding: 5px 0;
+    font-size: 12px;
+    color: var(--color-main);
+}
+
+.history-section {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-bottom: 20px;
+}
+
+.more-history-topic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.more-history-topic button {
+    all: unset;
+    background: var(--color-main);
+    color: var(--color-font-white);
+    font-size: 14px;
+    padding: 5px 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    position: relative;
+}
+
+/* *topic แต่ละประวัติแชท */
+.history-topic {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: var(--color-font);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin: 1px 0;
+    transition: all 0.1s ease-in-out;
+    position: relative;
+}
+
+.history-topic p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    margin-right: auto;
+    padding-top: 3px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    mask-image: linear-gradient(to right, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 99%);
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 99%);
+}
+
+.history-topic input[type="text"] {
+    all: unset;
+    cursor: text;
+    background: var(--background);
+    color: var(--color-font);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 3px 6px 0 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    border-radius: 3px;
+}
+
+.history-topic .edit-button {
+    display: flex;
+    margin-left: 3px;
+    padding: 3px;
+    border-radius: 8px;
+    background: var(--background);
+}
+
+.history-topic .edit-button:hover {
+    background: var(--object-fade);
+}
+
+.history-topic .edit-button svg {
+    width: 18px;
+    height: 18px;
+}
+
+.history-topic button {
+    all: unset;
+    display: none;
+    border-radius: 4px;
+    padding: 0 3px;
+    position: relative;
+}
+
+.history-topic .sidebar-button:hover {
+    background: var(--object);
+}
+
+.history-topic button svg {
+    margin: 0;
+    width: 18px;
+    height: 18px;
+}
+
+.history-topic.active {
+    background: var(--object-fade);
+}
+
+.history-topic:hover {
+    background: var(--object-fade);
+}
+
+.history-topic:hover input[type="text"] {
+    background: var(--object);
+}
+
+.history-topic.active button {
+    display: flex;
+}
+
+.history-topic:hover button {
+    display: flex;
+}
+
+.history-topic:hover p {
+    max-width: 160px;
+}
+
+
+.dashboard {
+    height: 30px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard button {
+    all: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    gap: 10px;
+    font-size: 14px;
+    border-radius: 8px;
+    background: var(--object-fade);
+    color: var(--color-font);
+}
+
+.dashboard button:hover {
+    background: var(--background);
+}
+
+.dashboard button svg {
+    width: 20px;
+    height: 20px;
+}
+
+
+
+@media (max-width: 1024px) {
+    /* *sidebar */
+    .sidebar-bg h1 {
+        font-size: 20px;
+    }
+
+    .silebar {
+        width: 0;
+        height: 100vh;
+        position: relative;
+        transition: width 0.3s ease-in-out;
+    }
+
+    .silebar:has(.sidebar-open) {
+        width: 0;
+    }
+    
+}

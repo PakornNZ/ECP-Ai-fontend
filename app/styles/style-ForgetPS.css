@@ -1,0 +1,189 @@
+.section-forget {
+    font-family: var(--font-Notosans);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.section-logo-forget {
+    display: flex;
+    align-items: center;
+    margin: 30px;
+}
+
+.section-logo-forget img {
+    width: 50px;
+    height: 50px;
+    object-fit: fill;
+    background: var(--color-main);
+    border-radius: 15px;
+    padding: 5px;
+}
+
+.section-logo-forget h1 {
+    color: var(--color-main);
+    padding: 0;
+    margin: 0;
+    margin-left: 20px;
+    font-size: 34px;
+    font-weight: 800;
+}
+
+/* * รูปพื้นหลัง */
+.backdrop-logo {
+    z-index: 0;
+    position: absolute;
+    width: 900px;
+    height: 900px;
+    object-fit: fill;
+    right: 0;
+    bottom: 0;
+    transform: translate(25%, 25%);
+    opacity: 0.1;
+
+    transition: all 0.3s ease-in-out;
+}
+
+.forget-bg {
+    z-index: 1;
+    position: relative;
+    background: var(--object);
+    filter: drop-shadow(0 0 3px var(--color-drop-shadow));
+    padding: 20px 30px;
+    border-radius: 20px;
+}
+
+.forget-bg p {
+    margin: 0;
+    margin-left: 10px;
+    color: var(--color-main);
+    font-weight: 500;
+}
+
+.forget-bg h1 {
+    color: var(--color-main);
+    font-weight: 700;
+    font-size: 25px;
+    padding-bottom: 20px;
+    margin: 0;
+    text-align: center;
+}
+
+/* * รหัสผ่านปัจจุบัน */
+.current-pass {
+    padding-bottom: 20px;
+}
+
+/* * input ใส่รหัสผ่านใหม่ */
+.forget-bg .input-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    margin: 3px 0 10px 0;
+
+    transition: all 0.3s ease-in-out;
+}
+
+.input-container button {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    margin: 14px 8px;
+
+    opacity: 0;
+    visibility: hidden;
+}
+
+.input-container svg {
+    width: 16px;
+    height: 16px;
+    color: var(--color-main);
+}
+
+.input-container input {
+    all: unset;
+    flex-grow: 1;
+    padding: 8px 25px 8px 10px;
+    border: 2px solid var(--stroke);
+    border-radius: 8px;
+    font-size: 16px;
+    color: var(--color-font);
+    background: var(--background);
+}
+
+.forget-bg input[type="password"]::-ms-reveal {
+    display: none;
+}
+
+.forget-bg input::placeholder {
+    color: var(--color-secondary);
+    font-size: 14px;
+}
+
+.forget-bg input:focus, .forget-bg input:hover {
+    border: 2px solid var(--color-main);
+}
+
+.input-container:hover button,
+.input-container:focus-within button {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* * ปุ่มบันทึกรหัสผ่าน */
+.forget-bg .save-password-bt {
+    all: unset;
+    cursor: pointer;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--color-main);
+    color: var(--color-font-white);
+    border-radius: 8px;
+    margin: 20px auto 0 auto;
+    font-size: 15px;
+    padding: 8.5px 0;
+}
+
+/* * ตรวจสอบรหัสผ่าน */
+.input-container .recheck-ps {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    margin-top: 5px;
+}
+
+.recheck-ps span {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--color-font-fade);
+    white-space: nowrap;
+}
+
+
+@media (max-width: 768px) {
+
+    .section-logo-forget h1 {
+        font-size: 28px;
+    }
+
+    .forget-bg .input-container {
+        width: 300px;
+    }
+
+    .backdrop-logo {
+        width: 700px;
+        height: 700px;
+    }
+
+}

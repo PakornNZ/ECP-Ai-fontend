@@ -1,0 +1,367 @@
+.homepage {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    position: relative;
+    overflow-x: hidden;
+    height: 100vh;
+}
+
+/* *side-bar fade */
+.sidebar-fade {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(4px);
+    background: #4d4d4d1c;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* *mainpage */
+.mainpage {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* *header */
+header {
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background: var(--background);
+}
+
+.mainpage-1 {
+    position: relative;
+}
+
+.mainpage-1 button {
+    all: unset;
+    display: flex;
+    color: var(--color-font);
+    border-radius: 8px;
+    position: relative;
+    width: 23px;
+    height: 23px;
+    padding: 3px;
+    
+    transition: all 0.3s ease-in-out;
+}
+
+.mainpage-1 button:hover {
+    background: var(--object-fade);
+}
+
+.mainpage-1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-Notosans);
+}
+
+header h1 {
+    margin: 0;
+    margin-left: 20px;
+    color: var(--color-main);
+    font-family: var(--font-Inter);
+    font-size: 23px;
+    font-weight: 800;
+    position: relative;
+    top: 1px;
+    cursor: pointer;
+}
+
+.ecp-magin {
+    margin-left: 10px;
+}
+
+.mainpage-2 {
+    margin-left: auto;
+    position: relative;
+    font-family: var(--font-Notosans);
+}
+
+.user-login {
+    position: relative;
+    display: flex;
+}
+
+.user-login button {
+    all: unset;
+    background: var(--color-main);
+    color: var(--color-font-white);
+    font-size: 14px;
+    padding: 3px 8px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.user-setting {
+    position: relative;
+    display: flex;
+}
+
+.user-setting button {
+    all: unset;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.user-setting button img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    display: flex;
+}
+
+/* *section */
+section {
+    overflow: hidden;
+    font-family: var(--font-Notosans);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.chat {
+    z-index: 5;
+    padding-bottom: 18px;
+    width: 100%;
+    background: var(--background);
+    display: contents;
+}
+
+.chat-welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom: 50%;
+    transform: translateY(50%);
+}
+
+.chat-welcome h1 {
+    color: var(--color-main);
+    font-size: 32px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.chat-welcome h2 {
+    color: var(--color-font);
+    margin: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* *Chat box */
+.chat-box {
+    display: flex;
+    justify-content: center;
+}
+
+.chat-box-bg {
+    position: relative;
+    display: flex;
+    align-items: end;
+    background: var(--object);
+    border: 1px solid var(--stroke);
+    /* filter: drop-shadow(0 0 3px var(--color-drop-shadow)); */
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    max-height: 164px;
+
+    /* transition: all 0.3s ease-in-out; */
+}
+
+.chat-box-bg textarea {
+    all: unset;
+    padding-left: 5px;
+    width: 600px;
+    margin: 5px 10px 5px 0;
+    color: var(--color-font);
+    overflow-y: auto;
+    resize: none;
+    font-size: 16px;
+
+    line-height: 24px;
+    max-height: calc(24px * 6);
+    white-space: pre-wrap;
+    word-break: break-word;
+    transition: all 0.3s ease-in-out;
+    cursor: text;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.chat-box-bg textarea::placeholder {
+    color: var(--color-secondary);
+}
+
+/* * scollbar textarea */
+.chat-box-bg textarea::-webkit-scrollbar {
+    width: 3px;
+    background: transparent;
+}
+
+.chat-box-bg textarea::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 10px;
+
+    transition: all 0.3s ease-in-out;
+}
+
+.chat-box-bg textarea:hover::-webkit-scrollbar-thumb {
+    background: var(--color-secondary);
+}
+
+/* * ปุ่มส่งข้อความ */
+.chat-box-bg button {
+    all: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--color-main);
+    color: var(--color-font-white);
+    filter: drop-shadow(0 0 3px var(--color-drop-shadow));
+    border-radius: 50%;
+    position: relative;
+}
+
+.chat-box-bg button svg {
+    width: 20px;
+    height: 20px;
+    padding: 8px 8px 6px 6px;
+}
+
+.chat-box-bg.loading button svg {
+    padding: 6px;
+    fill: var(--color-font-white);
+}
+
+/* * section respone chatbot */
+.chatbot-section {
+    overflow-y: auto;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.chatbot-section .chatbot-center {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    top: 0;
+    padding-top: 30px;
+    padding-bottom: 100px;
+    max-width: 650px;
+    width: 90%;
+    height: max-content;
+    transition: top 0.5s ease-in-out;
+}
+
+.chatbot-section .chatbot-center.move {
+    top: 80%;
+}
+
+/* * scollbar chatbot section */
+.chatbot-section::-webkit-scrollbar {
+    width: 3px;
+    background: transparent;
+}
+
+.chatbot-section::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    background: transparent;
+    border-radius: 10px;
+
+    /* transition: all 0.3s ease-in-out; */
+}
+
+.chatbot-section:hover::-webkit-scrollbar-thumb {
+    background: var(--color-secondary);
+}
+
+
+/* *footer */
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-family: var(--font-Notosans);
+    color: var(--color-font);
+    padding: 3px 0;
+    background: var(--background);
+}
+
+@media (max-width: 768px) {
+
+    /* *จัดตำแหน่ง header */
+    header {
+        justify-content: center;
+    }
+
+    header h1 {
+        font-size: 23px;
+        margin: 0;
+    }
+    
+    .ecp-magin {
+        margin: 0;
+    }
+
+    .mainpage-1 {
+        position: absolute;
+        z-index: 0;
+        left: 10px;
+    }
+
+    .mainpage-2 {
+        position: absolute;
+        z-index: 0;
+        right: 10px;
+    }
+
+    /* *welcome */
+    .chat-welcome h1 {
+        font-size: 28px;
+    }
+    
+    .chat-welcome h2 {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+    
+    /* *ขนาดChat box */
+    .chat-box-bg textarea {
+        width: 75vw;
+        max-height: calc(24px * 4);
+    }
+
+    /* *ขนาดFooter */
+    footer {
+        font-size: 12px;
+    }
+
+    /* * ขนานของ chatbot section */
+    .chatbot-center {
+        width: 90%;
+        overflow-x: hidden;
+        padding-bottom: 50px;
+    }
+}

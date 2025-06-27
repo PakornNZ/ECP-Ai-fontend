@@ -1,0 +1,192 @@
+.profile-chat-container {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.profile-chat-bg {
+    font-family: var(--font-Notosans);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    width: 850px;
+    padding: 10px;
+    border-radius: 12px;
+    background: var(--object);
+}
+
+.profile-chat-header {
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto 1fr auto;
+    position: relative;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--color-font);
+    background: var(--object-fade);
+    border-radius: 5px;
+    padding: 5px 8px;
+}
+
+.profile-chat-header span {
+    font-family: var(--font-Inter);
+    opacity: 0.8;
+}
+
+.profile-chat-header p {
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    mask-image: linear-gradient(to right, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 99%);
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 99%);
+}
+
+.delete-table-section {
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.delete-table-section p {
+    mask-image: none;
+    -webkit-mask-image: none;
+}
+
+.profile-chat-delete button {
+    all: unset;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: all 0.3s ease-in-out;
+}
+
+.profile-chat-delete button:hover {
+    background: var(--object);
+}
+
+
+.profile-chat-section {
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.profile-chat-section::-webkit-scrollbar {
+    height: 4px;
+    width: 4px;
+    background: transparent;
+}
+
+.profile-chat-section::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    background: transparent;
+    border-radius: 10px;
+    
+    transition: all 0.3s ease-in-out;
+}
+
+.profile-chat-section:hover::-webkit-scrollbar-thumb {
+    background: var(--color-secondary);
+}
+
+.profile-message-bubble {
+    color: var(--color-font);
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile-message-bubble p {
+    font-size: 14px;
+}
+
+.profile-message-bubble li {
+    font-size: 14px;
+}
+
+.profile-message-bubble li .section-p {
+    font-size: 14px;
+}
+
+.profile-query-bubble {
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.profile-query-bubble span {
+    background: var(--object-fade);
+    padding: 10px;
+    border-radius: 5px;
+    word-break: break-word;
+    white-space: pre-wrap;
+    max-width: 80%;
+}
+
+.profile-answer-bubble {
+    margin: 0 10px;
+    margin-bottom: 20px;
+}
+
+.profile-message-bubble:hover .profile-query-config .query-delete-button {
+    opacity: 1;
+    visibility: unset;
+}
+
+.profile-query-config {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 5px;
+}
+
+.profile-query-config .query-delete-button {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    margin: 0 5px;
+    color: var(--color-alert);
+    padding: 6px;
+    border-radius: 5px;
+    opacity: 0;
+    visibility: hidden;
+
+    transition: all 0.3s ease-in-out;
+}
+
+.profile-query-config .query-delete-button:hover {
+    background: var(--object-fade);
+}
+
+.profile-query-detail {
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+    margin-right: 5px;
+}
+
+.profile-query-rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px
+}
+
+.profile-query-rating svg {
+    color: var(--color-main);
+    fill: var(--color-main)
+}

@@ -1,0 +1,45 @@
+.edit-popup {
+    z-index: 10;
+    position: absolute;
+    right: -1%;
+    top: 20%;
+}
+
+.edit-menu {
+    background: var(--object-secondary);
+    padding: 3px;
+    border-radius: 8px;
+    border: 1px solid var(--stroke);
+}
+
+.edit-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--color-font-white);
+}
+
+.edit-menu li {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    padding: 2px 7px;
+    margin: 2px 0;
+}
+
+.edit-menu svg {
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+}
+
+.edit-menu li:hover {
+    background: var(--object-secondary-fade);
+}
+
+.edit-menu .delete-pop:hover {
+    color: var(--color-alert);
+}
