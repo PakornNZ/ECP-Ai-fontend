@@ -18,7 +18,7 @@
 }
 
 .upload-section {
-    z-index: 4;
+    z-index: 2;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -30,7 +30,6 @@
 }
 
 .upload-section.show {
-    z-index: 4;
     opacity: 1;
     visibility: visible;
 }
@@ -94,6 +93,32 @@
     background: var(--color-secondary);
 }
 
+.chunk-select {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.chunk-select ::placeholder {
+    font-size: 14px;
+    font-family: var(--font-Notosans);
+}
+
+.chunks-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chunks-list button {
+    padding: 5px 8px;
+    background: var(--object);
+    border-radius: 5px;
+    width: calc(60% / 5);
+    display: flex;
+    justify-content: center;
+}
+
 .upload label {
     margin-top: 20px;
     cursor: pointer;
@@ -102,7 +127,7 @@
     justify-content: center;
     width: 100%;
     padding: 10px 0;
-    margin: 10px 0;
+    margin: 20px 0;
     font-size: 14px;
     transition: all 0.3s ease-in-out;
 
@@ -130,7 +155,6 @@
 }
 
 .clip-file {
-    margin-top: 20px;
     display: flex;
     flex-direction: column;
     gap: 5px;

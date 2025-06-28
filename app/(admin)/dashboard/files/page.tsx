@@ -27,6 +27,7 @@ interface FilesProps {
     name: string
     detail: string
     type: string
+    chunk: string
     user: number
     updatedAt: string
     createdAt: string
@@ -183,7 +184,6 @@ export default function Files() {
 
                             const res = await axios.get('/api/dashboard/files')
                             const resData = res.data
-
                             if(resData.status === 1) {
                                 return resData.data
                             }
@@ -240,6 +240,11 @@ export default function Files() {
         {
             accessorKey: 'type',
             header: 'Type',
+            enableSorting: true,
+        },
+        {
+            accessorKey: 'chunk',
+            header: 'Chunk',
             enableSorting: true,
         },
         {
@@ -389,12 +394,30 @@ export default function Files() {
             const [cancelTopic, setCancelTopic] = useState<boolean>(false)
             const [isUpload, setIsUpload] = useState<boolean>(false)
 
+            const [isChunk, setIsChunk] = useState<string>('512')
+            const chunks = [
+                {value: '256'},
+                {value: '512'},
+                {value: '768'},
+                {value: '1024'},
+                {value: '8192'},
+            ]
             const handleClearUploadSection = () => {
                 setUploadSection(false)
                 setFileUpload([])
                 setFileName("")
                 setFileDetail("")
                 setIsUpload(false)
+                setIsChunk('512')
+            }
+
+            const handleChunkSize = () => {
+                const chunkSize = Number(isChunk)
+                if (chunkSize > 8192) {
+                    setIsChunk('8192')
+                } else if (chunkSize < 256) {
+                    setIsChunk('512')
+                }
             }
 
             const handleUploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -445,6 +468,8 @@ export default function Files() {
                                             formData.append("name", name)
                                             formData.append("detail", fileDetail)
                                         }
+                                        const chunkSize = isChunk === '' || Number(isChunk) > 8192 || Number(isChunk) < 256
+                                        formData.append("chunk", chunkSize ? '512' : isChunk)
                                         try {
                                             setIsUpload(true)
                                             const res = await axios.post('/api/dashboard/files/upload', formData)
@@ -531,9 +556,32 @@ export default function Files() {
                                     onChange={(e) => setFileDetail(e.target.value)}/>
                             </>
                         }
-                        <span style={{ fontSize: '12px', opacity: '0.9', paddingLeft: '5px' }}>
-                            เฉพาะ docx, json, pdf และ txt
-                        </span>
+                        <div className="chunk-select">
+                            <p>ขนาด Chunk</p>
+                            <input 
+                                    type="text"
+                                    style={{ width: '30%' }}
+                                    placeholder="256-8192"
+                                    value={isChunk}
+                                    onChange={(e) => {
+                                        const value = /^[0-9]+$/.test(e.target.value) ? e.target.value : ''
+                                        setIsChunk(value)
+                                    }}
+                                    onBlur={handleChunkSize}/>
+                            <div className="chunks-list">
+                                {chunks.map((value, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => {
+                                            setIsChunk(value.value)
+                                        }}
+                                        type="button"
+                                        className={`dropdown-item ${value.value === isChunk ? 'select' : ''}`}>
+                                            {value.value}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
                         <div className="upload">
                             <input 
                                 type="file"
@@ -580,20 +628,22 @@ export default function Files() {
                                     </div>
                             </label>
                         </div>
-                        <div className="clip-file">
-                            {fileUpload.map((files, index) => (
-                                <div className="file-lists" key={index}>
-                                    <FileText size={15} style={{ marginLeft: '10px' }}/><p>{files.name}</p>
-                                    <button 
-                                        type="button"
-                                        onClick={() => {
-                                            handleDeleteUploadFile(index)
-                                        }}>
-                                            <X size={15}/>
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
+                        { fileUpload.length !== 0 &&
+                            <div className="clip-file">
+                                {fileUpload.map((files, index) => (
+                                    <div className="file-lists" key={index}>
+                                        <FileText size={15} style={{ marginLeft: '10px' }}/><p>{files.name}</p>
+                                        <button 
+                                            type="button"
+                                            onClick={() => {
+                                                handleDeleteUploadFile(index)
+                                            }}>
+                                                <X size={15}/>
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        }
                         <div className="edit-save">
                             <button
                                 disabled={isUpload}
@@ -609,6 +659,9 @@ export default function Files() {
                                     }
                             </button>
                         </div>
+                        <p style={{ fontSize: '12px', opacity: '0.5', paddingTop: '5px', margin: '0', textAlign: 'center'}}>
+                            อนุญาตเฉพาะเอกสาร docx, json, pdf และ txt
+                        </p>
                     </div>
                 </div>
                 { UploadSection && <div className="upload-fade" /> }
