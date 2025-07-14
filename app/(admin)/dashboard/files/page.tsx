@@ -246,6 +246,11 @@ export default function Files() {
             accessorKey: 'chunk',
             header: 'Chunk',
             enableSorting: true,
+            cell: ({ row }) => {
+                return (
+                    <span>{row.original.chunk === '0' ? 'ตามหน้า' : row.original.chunk}</span>
+                )
+            }
         },
         {
             accessorKey: 'user',
@@ -394,29 +399,40 @@ export default function Files() {
             const [cancelTopic, setCancelTopic] = useState<boolean>(false)
             const [isUpload, setIsUpload] = useState<boolean>(false)
 
-            const [isChunk, setIsChunk] = useState<string>('512')
+            const [startPage, setStartPage] = useState<string>('')
+            const [stopPage, setStopPage] = useState<string>('')
+            const [isChunk, setIsChunk] = useState<string>('256')
+
             const chunks = [
                 {value: '256'},
                 {value: '512'},
                 {value: '768'},
                 {value: '1024'},
-                {value: '8192'},
             ]
+            const chunks_pdf = [
+                {value: '256'},
+                {value: '512'},
+                {value: '768'},
+                {value: '0'},
+            ]
+
+            const pdf_active = fileUpload.length === 1 && fileUpload[0].name.split('.').pop()?.toLowerCase() === 'pdf'
+
             const handleClearUploadSection = () => {
                 setUploadSection(false)
                 setFileUpload([])
                 setFileName("")
                 setFileDetail("")
                 setIsUpload(false)
-                setIsChunk('512')
+                setIsChunk('256')
+                setStartPage('')
+                setStopPage('')
             }
 
             const handleChunkSize = () => {
                 const chunkSize = Number(isChunk)
                 if (chunkSize > 8192) {
                     setIsChunk('8192')
-                } else if (chunkSize < 256) {
-                    setIsChunk('512')
                 }
             }
 
@@ -437,8 +453,8 @@ export default function Files() {
                     return () => clearTimeout(timeOutAPI)
                 } else {
                     files.forEach(file => {
-                        const fileSplit = file.name.split('.')[1]
-                        if (["docx", "json", "pdf", "txt"].includes(fileSplit)) {
+                        const fileSplit = file.name.split('.').pop()?.toLowerCase() ?? ''
+                        if (["csv", "docx", "pdf", "txt"].includes(fileSplit)) {
                             setFileUpload(prev => [...prev, file])
                         }
                     })
@@ -452,6 +468,15 @@ export default function Files() {
             const handleDeleteUploadFile = (fileIndex: number) => {
                 setFileUpload(fileUpload.filter((files, index) => index !== fileIndex))
             }
+
+
+            useEffect(() => {
+                const urls = fileUpload.map(file => URL.createObjectURL(file))
+
+                return () => {
+                    urls.forEach(url => URL.revokeObjectURL(url))
+                }
+            }, [fileUpload])
 
 
                                     // * upload file
@@ -468,8 +493,10 @@ export default function Files() {
                                             formData.append("name", name)
                                             formData.append("detail", fileDetail)
                                         }
-                                        const chunkSize = isChunk === '' || Number(isChunk) > 8192 || Number(isChunk) < 256
-                                        formData.append("chunk", chunkSize ? '512' : isChunk)
+                                        const chunkSize = isChunk === '' || Number(isChunk) > 8192
+                                        formData.append("chunk", chunkSize ? '256' : isChunk)
+                                        formData.append("start", startPage)
+                                        formData.append("stop", stopPage)
                                         try {
                                             setIsUpload(true)
                                             const res = await axios.post('/api/dashboard/files/upload', formData)
@@ -534,134 +561,196 @@ export default function Files() {
             <div className={`data-container ${isCompact ? 'table-layout' : ''}`}>
                 <div className={`upload-section ${UploadSection ? 'show' : ''}`}>
                     <div className="upload-bg">
-                        <div className="close-upload">
-                            <button type="button"
-                                onClick={handleClearUploadSection}>
-                                <X size={17}/>
-                            </button>
-                        </div>
-                        { !cancelTopic &&
-                            <>
-                                <p>ชื่อเอกสาร</p>
-                                <input 
-                                    type="text"
-                                    style={{ width: '70%' }}
-                                    value={fileName ?? ''}
-                                    onChange={(e) => setFileName(e.target.value)}/>
-                                <p>รายละเอียด</p>
-                                <textarea
-                                    style={{ width: '94%' }}
-                                    rows={2}
-                                    value={fileDetail ?? ''}
-                                    onChange={(e) => setFileDetail(e.target.value)}/>
-                            </>
-                        }
-                        <div className="chunk-select">
-                            <p>ขนาด Chunk</p>
-                            <input 
-                                    type="text"
-                                    style={{ width: '30%' }}
-                                    placeholder="256-8192"
-                                    value={isChunk}
-                                    onChange={(e) => {
-                                        const value = /^[0-9]+$/.test(e.target.value) ? e.target.value : ''
-                                        setIsChunk(value)
-                                    }}
-                                    onBlur={handleChunkSize}/>
-                            <div className="chunks-list">
-                                {chunks.map((value, index) => (
-                                    <button
-                                        key={index}
-                                        onClick={() => {
-                                            setIsChunk(value.value)
-                                        }}
-                                        type="button"
-                                        className={`dropdown-item ${value.value === isChunk ? 'select' : ''}`}>
-                                            {value.value}
-                                    </button>
-                                ))}
+                        <div className="upload-header">
+                            <div className="close-upload">
+                                <button type="button"
+                                    onClick={handleClearUploadSection}>
+                                    <X size={17}/>
+                                </button>
                             </div>
+                            { !cancelTopic &&
+                                <>
+                                    <p>ชื่อเอกสาร</p>
+                                    <input 
+                                        type="text"
+                                        style={{ width: '70%' }}
+                                        value={fileName ?? ''}
+                                        onChange={(e) => setFileName(e.target.value)}/>
+                                    <p>รายละเอียด</p>
+                                    <textarea
+                                        rows={2}
+                                        value={fileDetail ?? ''}
+                                        onChange={(e) => setFileDetail(e.target.value)}/>
+                                </>
+                            }
+                            <div className="chunk-select">
+                                <p>ขนาด Chunk</p>
+                                <input 
+                                        type="text"
+                                        style={{ width: '30%' }}
+                                        placeholder="256-8192"
+                                        value={isChunk}
+                                        onChange={(e) => {
+                                            const value = /^[0-9]+$/.test(e.target.value) ? e.target.value : ''
+                                            setIsChunk(value)
+                                        }}
+                                        onBlur={handleChunkSize}/>
+                                <div className="chunks-list">
+                                    { pdf_active ?
+                                        chunks_pdf.map((value, index) => (
+                                            <button
+                                                key={index}
+                                                onClick={() => {
+                                                    setIsChunk(value.value)
+                                                }}
+                                                type="button"
+                                                className={`dropdown-item ${value.value === isChunk ? 'select' : ''}`}>
+                                                    {value.value === '0' ? 'หน้า' : value.value}
+                                            </button>
+                                        )) :
+                                        chunks.map((value, index) => (
+                                            <button
+                                                key={index}
+                                                onClick={() => {
+                                                    setIsChunk(value.value)
+                                                }}
+                                                type="button"
+                                                className={`dropdown-item ${value.value === isChunk ? 'select' : ''}`}>
+                                                    {value.value}
+                                            </button>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                            { pdf_active && (
+                                <div className="file-page">
+                                    <p>จัดการหน้า (ไม่ระบุได้)</p>
+                                    <div className="file-page-input">
+                                        <input
+                                            type="input"
+                                            value={startPage}
+                                            onChange={(e) => {
+                                                const value = /^[0-9]+$/.test(e.target.value) ? e.target.value : '0'
+                                                setStartPage(value)
+                                            }}
+                                            />
+                                        <span>-</span>
+                                        <input
+                                            type="input" 
+                                            value={stopPage}
+                                            onChange={(e) => {
+                                                const value = /^[0-9]+$/.test(e.target.value) ? e.target.value : '0'
+                                                setStopPage(value)
+                                            }}
+                                            />
+                                    </div>
+                                </div>
+                            )}
                         </div>
-                        <div className="upload">
-                            <input 
-                                type="file"
-                                id="file-upload"
-                                multiple
-                                accept=".docx,.json,.pdf,.txt"
-                                className="hidden"
-                                style={{ display: 'none' }}
-                                onChange={handleUploadFile}/>
-                            <label 
-                                htmlFor="file-upload"
-                                onDrop={(e) => {
-                                    e.preventDefault();
-                                    const files = Array.from(e.dataTransfer.files ?? [])
-
-                                    if (fileUpload.length + files.length > 5) {
-                                        setArlertMessage({
-                                            color: false,
-                                            message: "เพิ่มได้ไม่เกิน 5 เอกสาร"
-                                        })
-                                        const timeOutAPI = setTimeout(() => {
+                        <div className="upload-content">
+                            <div className="upload">
+                                <input 
+                                    type="file"
+                                    id="file-upload"
+                                    multiple
+                                    accept=".docx,.csv,.pdf,.txt"
+                                    className="hidden"
+                                    style={{ display: 'none' }}
+                                    onChange={handleUploadFile}/>
+                                <label 
+                                    htmlFor="file-upload"
+                                    onDrop={(e) => {
+                                        e.preventDefault();
+                                        const files = Array.from(e.dataTransfer.files ?? [])
+                                        if (fileUpload.length + files.length > 5) {
                                             setArlertMessage({
                                                 color: false,
-                                                message: ""
+                                                message: "เพิ่มได้ไม่เกิน 5 เอกสาร"
                                             })
-                                        }, 6000)
-                                        return () => clearTimeout(timeOutAPI)
-                                    } else {
-                                        files.forEach(file => {
-                                            const fileSplit = file.name.split('.')[1]
-                                            if (["docx", "json", "pdf", "txt"].includes(fileSplit)) {
-                                                setFileUpload(prev => [...prev, file])
-                                            }
-                                        })
-                                    }
-                                }}
-                                onDragOver={(e) => {
-                                    e.preventDefault()
-                                }}>
-                                    <div>
-                                        <Paperclip
-                                            size={35}/>
-                                        เลือกเอกสาร
-                                    </div>
-                            </label>
-                        </div>
-                        { fileUpload.length !== 0 &&
-                            <div className="clip-file">
-                                {fileUpload.map((files, index) => (
-                                    <div className="file-lists" key={index}>
-                                        <FileText size={15} style={{ marginLeft: '10px' }}/><p>{files.name}</p>
-                                        <button 
-                                            type="button"
-                                            onClick={() => {
-                                                handleDeleteUploadFile(index)
-                                            }}>
-                                                <X size={15}/>
-                                        </button>
-                                    </div>
-                                ))}
+                                            const timeOutAPI = setTimeout(() => {
+                                                setArlertMessage({
+                                                    color: false,
+                                                    message: ""
+                                                })
+                                            }, 6000)
+                                            return () => clearTimeout(timeOutAPI)
+                                        } else {
+                                            files.forEach(file => {
+                                                const fileSplit = file.name.split('.')[1]
+                                                if (["csv", "docx", "pdf", "txt"].includes(fileSplit)) {
+                                                    setFileUpload(prev => [...prev, file])
+                                                }
+                                            })
+                                        }
+                                    }}
+                                    onDragOver={(e) => {
+                                        e.preventDefault()
+                                    }}>
+                                        <div>
+                                            <Paperclip
+                                                size={35}/>
+                                            เลือกเอกสาร
+                                        </div>
+                                    <p style={{ fontSize: '12px', opacity: '0.5', paddingTop: '5px', margin: '0', textAlign: 'center', position: 'absolute', bottom: '5px'}}>
+                                        อนุญาตเฉพาะเอกสาร csv, docx, pdf และ txt
+                                    </p>
+                                </label>
                             </div>
-                        }
-                        <div className="edit-save">
-                            <button
-                                disabled={isUpload}
-                                type="button"
-                                className="edit-save-button"
-                                onClick={submitUploadFile}>
-                                    { isUpload ? 
-                                        <>
-                                            <Loading />
-                                        </>
-                                    :
-                                        "เพิ่มเอกสารที่เลือก"
-                                    }
-                            </button>
                         </div>
-                        <p style={{ fontSize: '12px', opacity: '0.5', paddingTop: '5px', margin: '0', textAlign: 'center'}}>
-                            อนุญาตเฉพาะเอกสาร docx, json, pdf และ txt
-                        </p>
+                    </div>
+                    <div className="upload-file-footer">
+                        <div className="upload-file-list">
+                            { fileUpload.length !== 0 &&
+                                <div className="clip-file">
+                                    {fileUpload.map((files, index) => {
+                                        const fileURL = URL.createObjectURL(files)
+                                        const ext = files.name.split('.').pop()?.toLowerCase()
+                                        return (
+                                            <div key={index} className="file-lists" style={{ display: 'flex', alignItems: 'center' }}>
+                                                <FileText size={15} style={{ margin: '0 5px' }}/>
+                                                {ext === 'pdf' ? (
+                                                    <a
+                                                        href={fileURL}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer">
+                                                            {files.name}
+                                                    </a>
+                                                ) : (
+                                                    <p>{files.name}</p>
+                                                )}
+                                                <button
+                                                    type="button"
+                                                    onClick={() => handleDeleteUploadFile(index)}
+                                                    style={{ border: 'none', background: 'transparent', cursor: 'pointer' }}
+                                                    >
+                                                    <X size={13} />
+                                                </button>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            }
+                        </div>
+                        <div className="edit-save-section">
+                            <div className="edit-save">
+                                <button
+                                    disabled={isUpload}
+                                    type="button"
+                                    className="edit-save-button"
+                                    onClick={submitUploadFile}>
+                                        { isUpload ? 
+                                            <>
+                                                <Loading />
+                                            </>
+                                        :
+                                            <>
+                                                <Paperclip size={14}/>
+                                                เพิ่มเอกสารที่เลือก
+                                            </>
+                                        }
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 { UploadSection && <div className="upload-fade" /> }
@@ -735,8 +824,8 @@ export default function Files() {
                                 onChange={setFilterType}
                                 options={[
                                     { value: "", label: "ทั้งหมด" },
+                                    { value: "csv", label: "csv" },
                                     { value: "docx", label: "docx" },
-                                    { value: "json", label: "json" },
                                     { value: "pdf", label: "pdf" },
                                     { value: "txt", label: "txt" },
                                 ]}

@@ -78,8 +78,8 @@ export default function Dashboard () {
         switch(type) {
             case('docx'):
                 return '/logo_file/doc.svg'
-            case('json'):
-                return  '/logo_file/json.png'
+            case('csv'):
+                return  '/logo_file/csv.svg'
             case('pdf'):
                 return '/logo_file/pdf.svg'
             case('txt'):

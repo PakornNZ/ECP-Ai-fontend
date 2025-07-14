@@ -62,7 +62,6 @@ export default function Homepage() {
 
       if (resData.status === 1) {
         setStartNewChat(true)
-        setTimeout(() => setIsUserLoading(true), 200)
         setTimeout(() => {
           setChatId(resData.data.chat_id)
           setMessage(resData.data.chat)
@@ -83,6 +82,8 @@ export default function Homepage() {
       }
     } catch {
       router.push('/')
+    } finally {
+      setTimeout(() => setIsUserLoading(true), 200)
     }
   }, [router])
 
@@ -118,7 +119,7 @@ export default function Homepage() {
       setGuest(null)
       setStartNewChat(false)
     }
-  }, [pathname, chatId, get_chatRoom, router])
+  }, [pathname, chatId, get_chatRoom, router, session])
 
               // ! section setting
               const [activeSetting, setActiveSetting] = useState<boolean>(false)

@@ -949,8 +949,8 @@ export const EditFiles = ({ editingRow, activeEditingRow, editForm, activeSaveFo
                             <EditDropdown 
                                 value={form.type ?? ''}
                                 options={[
+                                    { value: "csv", label: "csv" },
                                     { value: "docx", label: "docx" },
-                                    { value: "json", label: "json" },
                                     { value: "pdf", label: "pdf" },
                                     { value: "txt", label: "txt" }
                                 ]}

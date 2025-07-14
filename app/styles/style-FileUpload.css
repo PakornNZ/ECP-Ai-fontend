@@ -23,6 +23,15 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background: var(--background);
+    padding: 12px;
+    width: 600px;
+    max-width: 600px;
+    min-width: 300px;
+    border-radius: 18px;
+    box-shadow: 0 0 0 1px var(--stroke);
+    filter: drop-shadow(0 0 50px var(--background));
+    color: var(--color-font);
     opacity: 0;
     visibility: hidden;
 
@@ -42,19 +51,15 @@
 }
 
 .upload-bg {
-    background: var(--background);
-    padding: 15px;
-    width: 300px;
-    border-radius: 18px;
-    color: var(--color-font);
-    box-shadow: 0 0 0 1px var(--stroke);
-    filter: drop-shadow(0 0 50px var(--background));
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    min-height: 270px;
 }
 
-.upload-bg p {
+.upload-section p {
     margin: 0;
     font-size: 14px;
-    margin-left: 5px;
 }
 
 .upload-bg input,
@@ -114,22 +119,29 @@
     padding: 5px 8px;
     background: var(--object);
     border-radius: 5px;
-    width: calc(60% / 5);
+    width: calc(60% / 4);
     display: flex;
     justify-content: center;
 }
 
+.upload {
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--object);
+    border-radius: 12px;
+    transition: all 0.3s ease-in-out;
+}
+
 .upload label {
-    margin-top: 20px;
+    position: relative;
     cursor: pointer;
-    border-radius: 8px;
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 100%;
-    padding: 10px 0;
-    margin: 20px 0;
+    height: 100%;
     font-size: 14px;
-    transition: all 0.3s ease-in-out;
 
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
@@ -145,33 +157,38 @@
     height: 100px;
     padding: 20px;
     gap: 15px;
-    background: var(--object);
+    background: var(--background);
     border-radius: 50%;
-    filter: drop-shadow(0 0 5px var(--object-fade));
+    filter: drop-shadow(0 0 6px var(--object-fade));
 }
 
-.upload label:hover {
-    opacity: 0.6;
+.upload:hover {
+    opacity: 0.7;
 }
 
 .clip-file {
-    display: flex;
-    flex-direction: column;
     gap: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 10px;
+    justify-content: center;
 }
 
 .file-lists {
     display: flex;
     align-items: center;
-    width: 100%;
+    width: 190px;
     border-radius: 5px;
-    background: var(--object-fade);
+    background: var(--object);
 }
 
+.file-lists a,
 .file-lists p {
+    color: var(--color-font);
+    text-decoration: none;
     width: 100%;
-    font-size: 14px;
-    margin: 5px;
+    font-size: 12px;
     font-weight: 300;
     white-space: nowrap;
     overflow: hidden;
@@ -199,6 +216,7 @@
 }
 
 .close-upload {
+    z-index: 2;
     position: absolute;
     right: 0;
     top: 0;
@@ -219,4 +237,52 @@
 
 .close-upload button:hover {
     background: var(--object);
+}
+
+.file-page-input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.file-page-input input {
+    width: 40px;
+    margin: 0;
+    margin-top: 3px;
+}
+
+.upload-file-footer {
+    display: flex;
+    flex-direction: column; 
+}
+
+.edit-save-section {
+    display: flex;
+    justify-content: center;
+}
+
+.edit-save {
+    margin-top: 20px;
+}
+
+@media (max-width: 1024px) {
+    .upload-section {
+        width: auto;   
+    }
+
+    .upload-bg {
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+    }
+
+    .upload {
+        height: 170px;
+    }
+
+    .upload label div {
+        width: 90px;
+        height: 90px;
+        padding: 15px;
+    }
+
 }
