@@ -1,13 +1,13 @@
 :root {
-  --font-Notosans: "Noto Sans Thai", apple-system, sans-serif;
+  --font-Notosans: "Sarabun", apple-system, sans-serif;
   --font-Inter: "Inter", apple-system, sans-serif;
 }
 
 @media (prefers-color-scheme: light) {
   html[data-theme="system"] {
     --background: #ffffff;
-    --object: #f7f7f7;
-    --object-fade: #e6e6e6e7;
+    --object: #fafafa;
+    --object-fade: #f1f1f1;
     --object-secondary: #3b3b3b;
     --object-secondary-fade: #333333e0;
     --stroke: #E8E8E8;
@@ -44,8 +44,8 @@
 
   html[data-theme="light"] {
     --background: #ffffff;
-    --object: #f7f7f7;
-    --object-fade: #e6e6e6e7;
+    --object: #fafafa;
+    --object-fade: #f1f1f1;
     --object-secondary: #3b3b3b;
     --object-secondary-fade: #333333e0;
     --stroke: #E8E8E8;
@@ -103,8 +103,8 @@
 
   html[data-theme="light"] {
     --background: #ffffff;
-    --object: #f7f7f7;
-    --object-fade: #e6e6e6e7;
+    --object: #fafafa;
+    --object-fade: #f1f1f1;
     --object-secondary: #3b3b3b;
     --object-secondary-fade: #333333e0;
     --stroke: #E8E8E8;

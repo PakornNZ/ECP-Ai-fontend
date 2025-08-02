@@ -154,6 +154,7 @@ section {
     font-size: 32px;
     font-weight: 800;
     margin: 0;
+    margin-bottom: 10px;
 }
 
 .chat-welcome h2 {
@@ -268,7 +269,7 @@ section {
     top: 0;
     padding-top: 30px;
     padding-bottom: 100px;
-    max-width: 650px;
+    max-width: 700px;
     width: 90%;
     height: max-content;
     transition: top 0.5s ease-in-out;
@@ -280,7 +281,7 @@ section {
 
 /* * scollbar chatbot section */
 .chatbot-section::-webkit-scrollbar {
-    width: 3px;
+    width: 5px;
     background: transparent;
 }
 

@@ -318,7 +318,7 @@ interface SettingProfileProps {
 }
 
 export const ProfileUser = ({ isProfile, setIsProfile }: SettingProfileProps) => {
-    const route = useRouter()
+    const router = useRouter()
     const popupRef = useRef<HTMLDivElement | null>(null)
     useOnClickOutside(popupRef, () => {
         setIsProfile(false)
@@ -379,7 +379,7 @@ export const ProfileUser = ({ isProfile, setIsProfile }: SettingProfileProps) =>
                                 }
                                 <span className="date-user">ลงทะเบียน {formatDate(session?.user.create_at || "")}</span>
                             </div>
-                            <div style={{ background: "var(--background)", padding: "15px", margin: "25px", display: "flex", flexDirection: "column", gap: "15px", borderRadius: "12px"}}>
+                            <div style={{ background: "var(--object)", padding: "15px", margin: "25px", display: "flex", flexDirection: "column", gap: "15px", borderRadius: "12px"}}>
                                 <div className="theme-user">
                                     <p>ธีม</p>
                                     {themeOptions.map((e) => (
@@ -397,7 +397,7 @@ export const ProfileUser = ({ isProfile, setIsProfile }: SettingProfileProps) =>
                         </div>
                         <div className="password-user">
                             { session?.user.provider == "credentials" && (
-                                <span className="changepass-user" onClick={() => route.push('/user/forgot-password')}>เปลี่ยนรหัสผ่าน</span>
+                                <span className="changepass-user" onClick={() => router.push('/forgot_password')}>เปลี่ยนรหัสผ่าน</span>
                             )}
                         </div>
                     </div>

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Noto_Sans_Thai, Inter } from "next/font/google";
+import { Sarabun, Inter } from "next/font/google";
 import SessionProvider from "@/app/components/SessionProv"
 import "./globals.css";
 
-const NotoSans = Noto_Sans_Thai({
+const NotoSans = Sarabun({
   subsets: ["thai"], 
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
 })
 
 const Inters = Inter({

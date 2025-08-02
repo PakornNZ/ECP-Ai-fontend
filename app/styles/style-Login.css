@@ -111,7 +111,7 @@
     flex-direction: column;
     margin: 0;
     overflow: hidden;
-    height: 115px;
+    height: 100px;
 
     transition: all 0.3s ease-in-out;
 }

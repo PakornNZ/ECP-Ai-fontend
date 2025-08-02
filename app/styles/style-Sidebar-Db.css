@@ -12,14 +12,16 @@
 .sidebar-section {
     z-index: 4;
     position: fixed;
-    left: 0;
-    top: 0;
+    left: 10px;
+    top: 10px;
+    border-radius: 12px;
     display: grid;
     grid-template-rows: auto 1fr auto;
-    background: var(--object);
-    width: 250px;
-    height: 100%;
-    transform: translateX(-100%);
+    box-shadow: 0 0 0 1px var(--stroke);
+    background: var(--background);
+    height: calc(100% - 20px);
+    width: 230px;
+    transform: translateX(-110%);
     transition: transform 0.3s ease-in-out;
 }
 
@@ -54,7 +56,7 @@
 }
 
 .menu-close-bt:hover {
-    background: var(--object-fade);
+    background: var(--object);
 }
 
 .menu-close-bt svg {
@@ -105,7 +107,7 @@
 }
 
 .sidebar-list a:hover {
-    background: var(--object-fade);
+    background: var(--object);
 }
 
 .sidebar-list a svg {
@@ -133,12 +135,13 @@
     gap: 10px;
     font-size: 14px;
     border-radius: 8px;
-    background: var(--object-fade);
+    padding: 3px 0;
+    background: var(--object);
     color: var(--color-font);
 }
 
 .homepage-back button:hover {
-    background: var(--background);
+    background: var(--object-fade);
 }
 
 .homepage-back button svg {
@@ -147,7 +150,9 @@
 }
 
 .activeURL {
-    background: var(--object-fade);
+    background: var(--object);
+    border-radius: 0 8px 8px 0 !important;
+    border-left: 3px solid var(--color-main);
 }
 
 

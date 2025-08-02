@@ -55,7 +55,7 @@ function ForgetPassword() {
         } else if (!session && token != "") {
             setPattern(true)
         } else if ((session && token !== "") || (!session && token === "")) {
-            router.push('/user/login-ecp_ai')
+            router.push('/sign_in')
         }
     }, [session, token, router])
 
@@ -74,7 +74,7 @@ function ForgetPassword() {
                         message: errorMessage
                     })
                     const timeOutAPI = setTimeout(() => {
-                        router.push('/user/login-ecp_ai')
+                        router.push('/sign_in')
                     }, 3000)
                     return () => clearTimeout(timeOutAPI)
                 }
@@ -129,7 +129,7 @@ function ForgetPassword() {
                                         message: resData.message
                                     })
                                     const timeOutBT = setTimeout(() => {
-                                        router.push('/user/login-ecp_ai')
+                                        router.push('/sign_in')
                                     }, 3000)
                                     return () => clearTimeout(timeOutBT)
                                 }

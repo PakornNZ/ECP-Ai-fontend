@@ -70,7 +70,7 @@ const handler = NextAuth({
 
                     if (!allowedDomains.includes(emailDomain)) {
                         const message = "อนุญาตเฉพาะอีเมล @rmuti.ac.th"
-                        return `/user/login-ecp_ai?error=${encodeURIComponent(JSON.stringify({ message: message }))}`
+                        return `/sign_in?error=${encodeURIComponent(JSON.stringify({ message: message }))}`
                     }
                 }
 
@@ -86,7 +86,7 @@ const handler = NextAuth({
                     user.provider = resData.data.user.provider
                     user.create_at = resData.data.user.create_at
                 } else {
-                    return `/user/login-ecp_ai?error=${encodeURIComponent(JSON.stringify({ message: resData.message }))}`
+                    return `/sign_in?error=${encodeURIComponent(JSON.stringify({ message: resData.message }))}`
                 }
                 return true
             } catch (error: unknown) {
@@ -94,7 +94,7 @@ const handler = NextAuth({
                 if (axios.isAxiosError(error) && error.response) {
                     message = error.response.data?.message || message
                 }
-                return `/user/login-ecp_ai?error=${encodeURIComponent(JSON.stringify({ message: message }))}`
+                return `/sign_in?error=${encodeURIComponent(JSON.stringify({ message: message }))}`
             }
         },
         async jwt({ token, user }) {
@@ -131,7 +131,7 @@ const handler = NextAuth({
         updateAge: 60 * 60
     },
     pages: {
-        signIn: '/user/login-ecp_ai',
+        signIn: '/sign_in',
     }
 })
 

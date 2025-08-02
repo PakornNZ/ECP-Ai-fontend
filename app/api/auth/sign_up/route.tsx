@@ -7,15 +7,15 @@ import { encryptURL } from "@/utils/crypto"
 const API = process.env.PRIVATE_API_AUTH
 const RESEND = process.env.RESEND_API_KEY
 const WEBSITE = process.env.NEXTAUTH_URL
-const resend = new Resend(RESEND)
 export async function POST(req: NextRequest) {
+    const resend = new Resend(RESEND)
     const payload = await req.json()
     try {
         const res = await axios.post(`${API}/sign_up`, payload)
         const resData = res.data
 
         const encodeURL = encodeURIComponent(await encryptURL(`token=${resData.data.token}&email=${payload.email}`))
-        const emailVerificationLink = `${WEBSITE}/user/email_verification?data=${encodeURL}`
+        const emailVerificationLink = `${WEBSITE}/email_verification?data=${encodeURL}`
 
         await resend.emails.send({
             from: 'ECP Ai <onboarding@resend.dev>',

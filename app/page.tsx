@@ -47,13 +47,17 @@ export default function Homepage() {
   const shouldMessageGuest = !session && !guest
 
   const [loading, setLoading] = useState<boolean>(true)
+  const [sidebar, setSidebar] = useLocalStorage('sidebar', false)
   useEffect(() => {
     if (typeof session === "undefined") return
+    if (!session) {
+      setSidebar(false)
+    }
     const timeOut = setTimeout(() => {
       setLoading(false)
     }, 200)
     return () => clearTimeout(timeOut)
-  }, [session])
+  }, [session, setSidebar])
 
   const get_chatRoom =  useCallback(async (chat_id: number) => {
     try {
@@ -123,7 +127,6 @@ export default function Homepage() {
 
               // ! section setting
               const [activeSetting, setActiveSetting] = useState<boolean>(false)
-              const [sidebar, setSidebar] = useLocalStorage('sidebar', false)
               const [scale, setScale] = useState<boolean>(false)
 
               // *เปิด-ปิด POPUP ตั้งค่าผู้ใช้งาน
@@ -165,7 +168,7 @@ export default function Homepage() {
 
               // *router ไปยังหน้าอื่นๆๆๆ
               const handleLogin = () => {
-                router.push("/user/login-ecp_ai")
+                router.push("/sign_in")
               }
 
               const hadleHome = () => {

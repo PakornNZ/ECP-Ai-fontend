@@ -65,7 +65,7 @@ function Verification() {
                 const resData = res.data
                 if (resData.status === 1) {
                     setTimeout(() => {
-                        router.push('/user/login-ecp_ai')
+                        router.push('/sign_in')
                     }, 2000)
                 }
             } catch (error: unknown) {
@@ -92,7 +92,7 @@ function Verification() {
     const { data: session } = useSession()
     useEffect(() => {
         if (session) {
-            router.push('/user/login-ecp_ai')
+            router.push('/sign_in')
         }
     }, [session, router])
 
@@ -134,7 +134,7 @@ function Verification() {
                             message: errorMessage
                         })
                         setTimeout(() => {
-                            router.push('/user/login-ecp_ai')
+                            router.push('/sign_in')
                         }, 1500)
                     } else {
                         setArlertMessage({

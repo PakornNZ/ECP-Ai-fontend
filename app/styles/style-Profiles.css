@@ -176,7 +176,7 @@
     position: relative;
     display: grid;
     grid-template-rows: auto 1fr;
-    background: var(--object);
+    box-shadow: 0 0 0 1px var(--object-fade);
     width: 600px;
     border-radius: 12px;
     padding: 10px;
@@ -235,7 +235,7 @@
     gap: 5px;
     grid-template-columns: auto 1fr;
     align-items: center;
-    background: var(--object-fade);
+    background: var(--object);
     border-radius: 8px;
     padding: 20px 5px;
     color: var(--color-font);

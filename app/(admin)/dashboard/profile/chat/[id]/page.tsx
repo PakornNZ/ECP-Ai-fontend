@@ -298,9 +298,11 @@ export default function ProfileChat() {
                                         <span>{msg.query}</span>
                                     </div>
                                     <div className='profile-query-detail'>
-                                        <div className='profile-query-rating'>
-                                            <Heart size={16}/> {msg.rating ? msg.rating : 0} คะแนน
-                                        </div>
+                                        { msg.rating !== 0 &&
+                                            <div className='profile-query-rating'>
+                                                <Heart size={16}/> {msg.rating} คะแนน
+                                            </div>
+                                        }
                                         <p style={{ margin: '0', fontSize: '12px', opacity: '0.8' }}>
                                             {FormatDateTime(msg.createdAt)}
                                         </p>

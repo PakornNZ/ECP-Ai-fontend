@@ -11,15 +11,15 @@ export async function middleware(request: NextRequest) {
         return NextResponse.rewrite(new URL('/', request.url))
     }
 
-    if (pathname.startsWith('/user/login-ecp_ai') && token) {
+    if (pathname.startsWith('/sign_in') && token) {
         return NextResponse.redirect(new URL('/', request.url))
     }
 
-    if (pathname.startsWith('/user/email_verification') && token) {
-        return NextResponse.redirect(new URL('/user/login-ecp_ai', request.url))
+    if (pathname.startsWith('/email_verification') && token) {
+        return NextResponse.redirect(new URL('/sign_in', request.url))
     }
 
-    if (pathname.startsWith('/user/forgot-password') && token && token.provider !== 'credentials') {
+    if (pathname.startsWith('/forgot_password') && token && token.provider !== 'credentials') {
         return NextResponse.redirect(new URL('/', request.url))
     }
 
@@ -35,9 +35,9 @@ export async function middleware(request: NextRequest) {
 export const config = {
     matcher: [
         '/chats/:path*',
-        '/user/login-ecp_ai:path*',
-        '/user/email_verification:path*',
-        '/user/forgot-password:path*',
+        '/sign_in:path*',
+        '/email_verification:path*',
+        '/forgot_password:path*',
         '/dashboard:path*',
         '/:path*',
     ],

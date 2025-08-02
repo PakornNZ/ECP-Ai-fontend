@@ -11,7 +11,6 @@
     width: 850px;
     padding: 10px;
     border-radius: 12px;
-    background: var(--object);
 }
 
 .profile-chat-header {
@@ -22,7 +21,8 @@
     gap: 10px;
     font-size: 14px;
     color: var(--color-font);
-    background: var(--object-fade);
+    background: var(--object);
+    box-shadow: 0 0 0 1px var(--object-fade);
     border-radius: 5px;
     padding: 5px 8px;
 }
@@ -129,7 +129,7 @@
 }
 
 .profile-query-bubble span {
-    background: var(--object-fade);
+    background: var(--object);
     padding: 10px;
     border-radius: 5px;
     word-break: break-word;

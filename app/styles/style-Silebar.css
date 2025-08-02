@@ -17,16 +17,17 @@
 .sidebar-bg {
     z-index: 4;
     position: fixed;
-    left: 0;
-    top: 0;
+    left: 10px;
+    top: 10px;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    background: var(--object);
+    box-shadow: 0 0 0 1px var(--stroke);
+    background: var(--background);
     font-family: var(--font-Notosans);
-    height: 100vh;
-    width: 250px;
-    transform: translateX(-100%);
+    height: calc(100% - 20px);
+    width: 230px;
+    transform: translateX(-110%);
     transition: transform 0.3s ease-in-out;
 }
 
@@ -39,6 +40,7 @@
     justify-content: space-between;
     padding: 10px;
     padding-bottom: 10px;
+    margin-bottom: 40px;
 }
 
 .sidebar-bg-1 button {
@@ -58,19 +60,12 @@
 }
 
 .sidebar-bg-1 button:hover {
-    background: var(--object-fade);
+    background: var(--object);
 }
 
 .sidebar-search {
     display: flex;
     gap: 15px;
-}
-
-.sidebar-bg h1 {
-    text-align: center;
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--color-main);
 }
 
 /* *chat-history */
@@ -79,24 +74,23 @@
     overflow-y: auto;
     overflow-x: hidden;
     margin-bottom: 20px;
-    padding: 0 10px;
+    padding: 0 5px;
     position: relative;
 }
 
 .history-chat::-webkit-scrollbar {
-    width: 3px;
+    width: 5px;
     background: transparent;
 }
 
 .history-chat:hover::-webkit-scrollbar-thumb {
     background: transparent;
     border-radius: 10px;
-
     transition: all 0.3s ease-in-out;
 }
 
 .history-chat:hover::-webkit-scrollbar-thumb {
-    background: var(--color-secondary);
+    background: var(--object-fade);
 }
 
 .history-chat h2 {
@@ -113,23 +107,6 @@
     margin-bottom: 20px;
 }
 
-.more-history-topic {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.more-history-topic button {
-    all: unset;
-    background: var(--color-main);
-    color: var(--color-font-white);
-    font-size: 14px;
-    padding: 5px 15px;
-    margin: 10px 0;
-    border-radius: 8px;
-    position: relative;
-}
-
 /* *topic แต่ละประวัติแชท */
 .history-topic {
     display: flex;
@@ -137,7 +114,8 @@
     cursor: pointer;
     color: var(--color-font);
     border-radius: 8px;
-    padding: 8px 12px;
+    padding: 10px 8px;
+    height: 20px;
     margin: 1px 0;
     transition: all 0.1s ease-in-out;
     position: relative;
@@ -148,7 +126,6 @@
     font-size: 14px;
     font-weight: 400;
     margin-right: auto;
-    padding-top: 3px;
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
@@ -211,11 +188,13 @@
 }
 
 .history-topic.active {
-    background: var(--object-fade);
+    border-radius: 0 8px 8px 0;
+    border-left: 3px solid var(--color-main);
+    background: var(--object);
 }
 
 .history-topic:hover {
-    background: var(--object-fade);
+    background: var(--object);
 }
 
 .history-topic:hover input[type="text"] {
@@ -253,12 +232,13 @@
     gap: 10px;
     font-size: 14px;
     border-radius: 8px;
-    background: var(--object-fade);
+    padding: 3px 0;
+    background: var(--object);
     color: var(--color-font);
 }
 
 .dashboard button:hover {
-    background: var(--background);
+    background: var(--object-fade);
 }
 
 .dashboard button svg {

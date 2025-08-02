@@ -52,7 +52,7 @@ export default function Sidebar({ isState, closeSidebar, ChatIdSelect, chatId, n
     const [loadingHistory, setLoadingHistory] = useState<boolean>(true)
     const [activeChatId, setActiveChatId] = useState<number | null>(null)
     
-    const [chatHistory, setChatHistory] = useState<ChatHistoryProps[] | null>(null)
+    const [chatHistory, setChatHistory] = useState<ChatHistoryProps[]>([])
     
     const { data: session } = useSession()
     useEffect(() => {
@@ -181,10 +181,7 @@ export default function Sidebar({ isState, closeSidebar, ChatIdSelect, chatId, n
 
             const submitDelete = async (chat_id: number) => {
                 if (!chat_id) return
-                setChatHistory((prev) => {
-                    if (!prev) return prev
-                    return prev.filter((item) => item.id !== chat_id)
-                })             
+                setChatHistory((prev) => prev.filter((item) => item.id !== chat_id))           
                 try {
                         await axios.put('/api/data/chat_delete', { chat_id })
                 } catch (error: unknown) {
@@ -220,7 +217,6 @@ export default function Sidebar({ isState, closeSidebar, ChatIdSelect, chatId, n
                         </button>
                     </div>
                 </div>
-                <h1>ประวัติการสนทนา</h1>
                 { !loadingHistory ? (
                     <>
                         <div className="history-chat">

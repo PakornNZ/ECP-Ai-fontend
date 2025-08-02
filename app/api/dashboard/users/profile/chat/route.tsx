@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     
     const payload = await req.json()
     try {
-        const res = await axios.post(`${API}/dashboard/profile-chat`, payload, {
+        const res = await axios.post(`${API}/dashboard/profile_chat`, payload, {
             headers: {
                 Authorization: 'Bearer ' + jwtToken
             }

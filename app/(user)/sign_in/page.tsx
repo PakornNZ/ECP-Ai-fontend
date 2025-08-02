@@ -16,7 +16,7 @@ import { signIn, useSession } from "next-auth/react"
 import LoadingFull from "@/app/components/dashboard/LoadingFull"
 
 
-function Login() {
+function SingIn() {
     const router = useRouter()
 
     const forgetPassword = async () => {
@@ -71,43 +71,43 @@ function Login() {
     }
     
     const [nextState, setNextState] = useState(false)
-    const handleNext = async () => {
-        setLgEmailState(false)
-        try {
-            const res = await axios.post('/api/auth/sign_in/check_email', { lgEmail })
-            const resData = res.data
-            if (resData.status === 1) {
-                setNextState(true)
-            }
-        } catch (error: unknown) {
-            setNextState(false)
-            if (!axios.isAxiosError(error)) return
-            const errorMessage = error.response?.data?.message
-            setArlertMessage({
-                color: false,
-                message: errorMessage
-            })
-            const timeOutAPI = setTimeout(() => {
-                setArlertMessage({
-                    color: false,
-                    message: ""
-                })
-            }, 6000)
-            return () => clearTimeout(timeOutAPI)
-        } finally {
-            const timeOutBT = setTimeout(() => {
-                setLgEmailState(true)
-            }, 2000)
-            return () => clearTimeout(timeOutBT)
-        }
-    }
+    // const handleNext = async () => {
+    //     setLgEmailState(false)
+    //     try {
+    //         const res = await axios.post('/api/auth/sign_in/check_email', { lgEmail })
+    //         const resData = res.data
+    //         if (resData.status === 1) {
+    //             setNextState(true)
+    //         }
+    //     } catch (error: unknown) {
+    //         setNextState(false)
+    //         if (!axios.isAxiosError(error)) return
+    //         const errorMessage = error.response?.data?.message
+    //         setArlertMessage({
+    //             color: false,
+    //             message: errorMessage
+    //         })
+    //         const timeOutAPI = setTimeout(() => {
+    //             setArlertMessage({
+    //                 color: false,
+    //                 message: ""
+    //             })
+    //         }, 6000)
+    //         return () => clearTimeout(timeOutAPI)
+    //     } finally {
+    //         const timeOutBT = setTimeout(() => {
+    //             setLgEmailState(true)
+    //         }, 2000)
+    //         return () => clearTimeout(timeOutBT)
+    //     }
+    // }
     
     const [registerState, setRegisterState] = useState(false)
     const handleRegister = () => {
         setRegisterState(prev => !prev)
-        if (nextState) {
-            handleNext()
-        }
+        // if (nextState) {
+        //     handleNext()
+        // }
         if (showPassword) {
             handleShowPassword()
         }
@@ -206,7 +206,7 @@ function Login() {
                                 
                                 if (resData.status === 1) {
                                     const encodeURL = encodeURIComponent(await encryptURL(`email=${payload.email}`))
-                                    router.push(`/user/email_verification?data=${encodeURL}`)
+                                    router.push(`/email_verification?data=${encodeURL}`)
                                 }
                             } catch (error: unknown) {
                                 if (!axios.isAxiosError(error)) return
@@ -486,7 +486,7 @@ function Login() {
                                     disabled={ nextState ? submitUser || !allowLogin : !lgEmailState} 
                                     className={`form-bt ${ nextState ? "submit" : ""}`} 
                                     type="button" 
-                                    onClick={ !nextState ? handleNext  : submitLogin }>
+                                    onClick={ !nextState ? () => setNextState(true)  : submitLogin }>
                                         { !nextState ? <><span>ถัดไป</span><ArrowRight /></> : <>{ submitUser ? <Loading/> : "เข้าสู่ระบบ" }</> }
                                 </button>
                                 <div className="register-footer">
@@ -600,7 +600,7 @@ function Login() {
 export default function LoginPage() {
     return (
         <Suspense fallback={<LoadingFull />}>
-            <Login />
+            <SingIn />
         </Suspense>
     )
 }
