@@ -18,10 +18,11 @@ export async function PUT(req: NextRequest) {
         const emailVerificationLink = `${WEBSITE}/email_verification?data=${encodeURL}`
 
         await resend.emails.send({
-            from: 'ECP Ai',
+            from: 'ECP Ai <support@ecpai.me>',
             to: email,
-            subject: "ยืนยันการลงทะเบียนเว็บไซต์ ECP Ai",
-            react: EmailVerificationEmailTemplate({ emailVerificationLink: emailVerificationLink })
+            subject: "ยืนยันการลงทะเบียน ECP Ai",
+            react: EmailVerificationEmailTemplate({ emailVerificationLink: emailVerificationLink }),
+            text: "ข้อความนี้ถูกส่งจาก ecpai.me เพื่อยืนยันการลงทะเบียนของคุณ"
         })
 
         return NextResponse.json(resData, { status: 200 })

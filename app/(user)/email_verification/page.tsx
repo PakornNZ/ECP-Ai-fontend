@@ -12,8 +12,10 @@ import axios from "axios";
 import { decryptURL } from "@/utils/crypto"
 import { useSession } from "next-auth/react"
 import Loading from "@/app/components/dashboard/LoadingFull";
+import { useTheme } from "@/app/theme-context";
 
 function Verification() {
+    useTheme()
     const router = useRouter()
     const [allowSend, setAllowSend] = useState<boolean>(false)
     const [timer, setTimer] = useState<number>(60)

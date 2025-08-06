@@ -3,7 +3,7 @@
     grid-template-columns: auto 1fr;
     position: relative;
     overflow-x: hidden;
-    height: 100vh;
+    height: 100dvh;
 }
 
 /* *side-bar fade */
@@ -15,12 +15,12 @@
     backdrop-filter: blur(4px);
     background: #4d4d4d1c;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
 }
 
 /* *mainpage */
 .mainpage {
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -267,10 +267,9 @@ section {
     flex-direction: column;
     gap: 50px;
     top: 0;
-    padding-top: 30px;
-    padding-bottom: 100px;
+    padding: 30px 5px 100px 5px;
     max-width: 700px;
-    width: 90%;
+    width: 95%;
     height: max-content;
     transition: top 0.5s ease-in-out;
 }

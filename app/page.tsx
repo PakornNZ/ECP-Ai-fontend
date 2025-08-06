@@ -208,6 +208,7 @@ export default function Homepage() {
                   if (!chatId) {
                     setStartNewChat(true)
                     const chat_id = await submitQueryNewChat()
+                    CreateTopicChat(chat_id, querySend)
                     const newMessage: MessageProps = {
                       id: null,
                       query: querySend,
@@ -218,7 +219,6 @@ export default function Homepage() {
                     setIsLoading(true)
 
                     responseAnsewer(chat_id, querySend)
-                    CreateTopicChat(chat_id, querySend)
                   } else {
                     const newMessage: MessageProps = {
                       id: null,

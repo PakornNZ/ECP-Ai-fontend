@@ -19,10 +19,11 @@ export async function POST(req: NextRequest) {
         const updatePasswordLink = `${WEBSITE}/forgot_password?data=${encodeURL}`
 
         await resend.emails.send({
-            from: "ECP Ai",
+            from: 'ECP Ai <support@ecpai.me>',
             to: email,
-            subject: "เปลี่ยนรหัสผ่านเว็บไซต์ ECP Ai",
-            react: UpdatePasswordEmailTemplate({ updatePasswordLink: updatePasswordLink })
+            subject: "เปลี่ยนรหัสผ่าน ECP Ai",
+            react: UpdatePasswordEmailTemplate({ updatePasswordLink: updatePasswordLink }),
+            text: "ข้อความนี้ถูกส่งจาก ecpai.me เพื่อขอเปลี่ยนรหัสผ่านของคุณ"
         })
 
         return NextResponse.json(resData, { status: 200 })

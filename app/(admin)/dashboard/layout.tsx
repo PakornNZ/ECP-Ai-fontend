@@ -120,16 +120,18 @@ export default function DashboardLayout ({ children }: Readonly<{ children: Reac
                     <div className="menu-section">
                         <div className="menu-bg">
                             { !sidebar ?(
-                                <button 
-                                    type="button"
-                                    className="menu-open-bt"
-                                    onClick={handleSidebar}>
-                                        <PanelRight />
-                                </button>
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <button 
+                                        type="button"
+                                        className="menu-open-bt"
+                                        onClick={handleSidebar}>
+                                            <PanelRight />
+                                    </button>
+                                    <h1>{isShow}</h1>
+                                </div>
                             ) : (
-                                <div className="menu-open-dis" />
+                                <h1 style={{ margin: '0' }}>{isShow}</h1>
                             )}
-                            <h1>{isShow}</h1>
                             <div style={{ position: "relative" }}>
                                 <div className="admin-setting">
                                     <button 

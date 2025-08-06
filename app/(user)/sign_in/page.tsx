@@ -14,10 +14,12 @@ import { Loading, ArlertEmail, Arlert } from "@/app/components/object/object"
 import { encryptURL } from "@/utils/crypto"
 import { signIn, useSession } from "next-auth/react"
 import LoadingFull from "@/app/components/dashboard/LoadingFull"
+import { useTheme } from "@/app/theme-context";
 
 
 function SingIn() {
     const router = useRouter()
+    useTheme()
 
     const forgetPassword = async () => {
         const domain = lgEmail.split('@')[1] || ""
@@ -467,8 +469,8 @@ function SingIn() {
                                         </button>
                                         <ArlertEmail messageArlert={arlertEmail} />
                                     </div>
-                                    <p><KeyRound />รหัสผ่าน</p>
-                                    <div className="input-container">
+                                    <p className={`${!nextState ? 'nextState-disble' : '' }`}><KeyRound />รหัสผ่าน</p>
+                                    <div className={`input-container ${!nextState ? 'nextState-disble' : '' }`}>
                                         <input
                                             disabled={!nextState} 
                                             type={showPassword ? "text" : "password"}  
@@ -480,7 +482,7 @@ function SingIn() {
                                             { showPassword ? <Eye onMouseDown={handleShowPassword}/> : <EyeClosed onMouseDown={handleShowPassword}/> }
                                         </button>
                                     </div>
-                                    <span className="forgot-password" onClick={forgetPassword}>ลืมรหัสผ่าน ?</span>
+                                    <span className={`forgot-password ${!nextState ? 'nextState-disble' : '' }`} onClick={forgetPassword}>ลืมรหัสผ่าน ?</span>
                                 </div>
                                 <button
                                     disabled={ nextState ? submitUser || !allowLogin : !lgEmailState} 
@@ -520,7 +522,7 @@ function SingIn() {
                             </div>
 
                             {/* ฟอร์ม Register */}
-                            <div className="section-signup">
+                            <div className={`section-signup ${!registerState ? 'signup-disable' : ''}`}>
                                 <button className="undo-section" type="button" onClick={handleRegister} left-title="ย้อนกลับ" ><Undo2 /></button>
                                 <h1>ลงทะเบียน</h1>
                                 <div className="form-data-rg">

@@ -3,7 +3,7 @@
     place-items: center;
     margin: 0;
     padding: 0;
-    height: 100vh;
+    height: 100dvh;
     width: 100vw;
     background: var(--object);
     overflow: hidden;
@@ -88,6 +88,7 @@
     position: relative;
     overflow: hidden;
     display: flex;
+    opacity: 1;
 }
 
 /* * ส่วนของ signin และ signup */
@@ -96,6 +97,13 @@
     flex-shrink: 0;
     padding: 40px 50px;
     position: relative;
+    opacity: 1;
+    visibility: visible;
+}
+
+.signup-disable {
+    visibility: hidden !important;
+    opacity: 0 !important;
 }
 
 .section-data h1 {
@@ -111,7 +119,7 @@
     flex-direction: column;
     margin: 0;
     overflow: hidden;
-    height: 100px;
+    height: 109px;
 
     transition: all 0.3s ease-in-out;
 }
@@ -148,6 +156,7 @@
     display: flex;
     align-items: center;
     width: 350px;
+    opacity: 1;
 }
 
 .form-data-rg .input-ps {
@@ -177,15 +186,15 @@
     justify-content: center;
     position: absolute;
     right: 0;
-    margin: 8px;
+    padding: 8px;
 
     opacity: 0;
     visibility: hidden;
 }
 
 .input-container svg {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     color: var(--color-main);
 }
 
@@ -228,6 +237,7 @@
     height: 16px;
     color: var(--color-main);
     margin-right: 5px;
+    opacity: 1;
 }
 
 .form-data p,
@@ -240,6 +250,7 @@
     margin: 5px 0;
     padding: 0;
     padding-left: 10px;
+    opacity: 1;
 }
 
 .form-data p {
@@ -376,7 +387,6 @@
     padding-left: 20px;
     font-size: 15px;
     border: 1px solid var(--stroke);
-    filter: drop-shadow(0 0 3px var(--color-drop-shadow));
 }
 
 .section-login-bt img {
@@ -474,6 +484,9 @@
 }
 
 
+.nextState-disble {
+    opacity: 0 !important; 
+}
 
 
 @media (max-width: 1024px) {
@@ -530,6 +543,7 @@
     .section-signup {
         width: 100vw;
         padding: 0;
+        opacity: 1;
     }
 
     .section-data h1 {

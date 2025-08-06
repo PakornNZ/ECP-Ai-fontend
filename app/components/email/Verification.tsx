@@ -25,7 +25,7 @@ export default function EmailVerificationEmailTemplate(
                 <tr>
                     <td style={{ textAlign: 'center' }}>
                         <img
-                            src="https://i.pinimg.com/736x/a6/84/a3/a684a372af2b177e6a5e1f6589954d26.jpg"
+                            src="https://ecpai.me/logo/logo.jpg"
                             alt="Logo"
                             width={40}
                             height={40}
@@ -37,7 +37,7 @@ export default function EmailVerificationEmailTemplate(
             </table>
 
             <p style={{ fontSize: '14px', margin: '0', marginTop: '20px' }}>
-                มีคำขอยืนยันตัวตนสำหรับการลงทะเบียนเข้าใช้งานเว็บไซต์ ECP Ai
+                มีคำขอยืนยันตัวตนสำหรับการลงทะเบียนเข้าใช้งาน ECP Ai
             </p>
             <p style={{ fontSize: '14px', margin: '0' }}>
                 กรุณาคลิกปุ่มด้านล่างเพื่อยืนยันอีเมลของคุณภายใน 5นาที หากเกินเวลากำหนด

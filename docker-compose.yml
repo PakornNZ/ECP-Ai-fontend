@@ -9,9 +9,12 @@ services:
       TZ: Asia/Bangkok
     ports:
       - "3000:3000"
-    volumes:
-      - /home/ecpai/storage/ecp-ai:/app/data
-      - /home/ecpai/storage/ecp-ai:/app/node_modules
     restart: unless-stopped
     env_file:
       - .env.prod
+    networks:
+      - project-net
+
+networks:
+  project-net:
+    external: true

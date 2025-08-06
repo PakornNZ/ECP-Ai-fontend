@@ -25,7 +25,7 @@ export default function UpdatePasswordEmailTemplate({
                 <tr>
                     <td style={{ textAlign: 'center' }}>
                         <img
-                            src="https://i.pinimg.com/736x/a6/84/a3/a684a372af2b177e6a5e1f6589954d26.jpg"
+                            src="https://ecpai.me/logo/logo.jpg"
                             alt="Logo"
                             width={40}
                             height={40}

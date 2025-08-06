@@ -14,7 +14,7 @@
     display: grid;
     grid-template-rows: auto 1fr auto;
     position: relative;
-    height: 100vh;
+    height: 100dvh;
 }
 
 .data-section {
@@ -73,7 +73,7 @@
 }
 
 .search-filter-select .button-focus {
-    background: var(--object-fade);
+    background: var(--object);
 }
 
 .search-filter-select {
@@ -82,14 +82,14 @@
     display: flex;
     flex-direction: column;
     margin-top: 8px;
-    background: var(--object);
+    background: var(--background);
     box-shadow: 0 0 0 1px var(--stroke);
     border-radius: 8px;
     overflow: hidden;
 }
 
 .search-filter-select button:hover {
-    background: var(--object-fade);
+    background: var(--object);
 }
 
 
@@ -98,7 +98,7 @@
     position: relative;
     align-items: center;
     width: fit-content;
-    background: var(--object);
+    background: var(--background);
     color: var(--color-font);
     border-radius: 8px;
     outline: none;
@@ -515,7 +515,7 @@
     font-size: 14px;
     padding: 3px 8px;
     color: var(--color-font);
-    background: var(--object-fade);
+    background: var(--object);
     box-shadow: 0 0 0 1px var(--stroke);
 }
 

@@ -6,7 +6,7 @@
     overflow: hidden;
     position: relative;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
 }
 
 .section-logo-forget {
@@ -97,15 +97,15 @@
     justify-content: center;
     position: absolute;
     right: 0;
-    margin: 14px 8px;
+    padding: 10px;
 
     opacity: 0;
     visibility: hidden;
 }
 
 .input-container svg {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     color: var(--color-main);
 }
 

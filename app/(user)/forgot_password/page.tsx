@@ -12,9 +12,10 @@ import { useSession, signOut } from "next-auth/react"
 import { useSearchParams, useRouter } from "next/navigation"
 import axios from "axios"
 import LoadingFull from "@/app/components/dashboard/LoadingFull"
+import { useTheme } from "@/app/theme-context";
 
 function ForgetPassword() {
-
+    useTheme()
     const router = useRouter()
     
     // * ข้อความแจ้งเตือน
