@@ -15,6 +15,7 @@ import { Arlert, LogoutState, ProfileUser } from "@/app/components/object/object
 import axios from "axios";
 import Loading from "./components/dashboard/LoadingFull";
 import Image from "next/image";
+import AllowUser from "./components/object/AllowUser";
 
 interface MessageProps {
   id: number | null
@@ -58,6 +59,15 @@ export default function Homepage() {
     }, 200)
     return () => clearTimeout(timeOut)
   }, [session, setSidebar])
+
+  
+  const [activeAllow, setActiveAllow] = useState<boolean | null>(null)
+  const [allowUser] = useLocalStorage('allow-user', false)
+  useEffect(() => {
+    setActiveAllow(!allowUser)
+  }, [allowUser])
+
+
 
   const get_chatRoom =  useCallback(async (chat_id: number) => {
     try {
@@ -275,34 +285,26 @@ export default function Homepage() {
 
                                     // * ตั้งชื่อแชท
                                     const [topic, setTopic] = useState<ChatHistoryProps | null>(null)
-                                    const CreateTopicChat = async (chat_id: number, querySend: string) => {
+                                    const CreateTopicChat = (chat_id: number, querySend: string) => {
                                       const payload = {
                                         "chat_id": chat_id,
                                         "query": querySend
                                       }
 
-                                      try {
-                                        const res = await axios.put('/api/chat/new_topic', payload )
+                                      axios.put('/api/chat/new_topic', payload)
+                                      .then(res => {
                                         const resData = res.data
-
                                         if (resData.status === 1) {
                                           setTopic(resData.data)
                                         }
-                                      } catch (error: unknown) {
-                                        if (!axios.isAxiosError(error)) return
-                                        const errorMessage = error.response?.data?.message
-                                        setArlertMessage({
-                                            color: false,
-                                            message: errorMessage
-                                        })
-                                        const timeOutAPI = setTimeout(() => {
-                                            setArlertMessage({
-                                                color: false,
-                                                message: ""
-                                            })
-                                        }, 6000)
-                                        return () => clearTimeout(timeOutAPI)
-                                      }
+                                      })
+                                      .catch(error => {
+                                        if (axios.isAxiosError(error)) {
+                                          const errorMessage = error.response?.data?.message
+                                          setArlertMessage({ color: false, message: errorMessage })
+                                          setTimeout(() => setArlertMessage({ color: false, message: "" }), 6000)
+                                        }
+                                      })
                                     }
 
 
@@ -499,6 +501,7 @@ export default function Homepage() {
     <>
         <ProfileUser isProfile={isProfileState} setIsProfile={handleProfileUser}/>
         <Arlert messageArlert={arlertMessage} />
+        { activeAllow != null && activeAllow && session &&<AllowUser />}
         <div className="homepage">
           <div className="silebar">
             <Sidebar 

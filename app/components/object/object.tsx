@@ -282,6 +282,10 @@ export const LogoutState = ({ isLogout, setIsLogout }: SettingLogoutProps) => {
     })
 
     const handleLogout = async () => {
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('allow-user', 'false')
+            localStorage.setItem('sidebar', 'false')
+        }
         await signOut({redirect: true})
     }
 

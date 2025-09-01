@@ -12,7 +12,7 @@ import Image from "next/image";
 import GoogleLogo from "@/public/logo/google-brands.svg"
 import LineLogo from "@/public/logo/line-brands.svg"
 import { useEffect, useState } from "react"
-import { BadgeAlert, BadgeCheck, BadgeMinus, Check, ChevronLeft, ChevronRight, Inbox, Mail, Pencil, Settings, X } from "lucide-react";
+import { BadgeAlert, BadgeCheck, BadgeMinus, ChevronLeft, ChevronRight, Inbox, Mail, Settings } from "lucide-react";
 import { FormatDateTime } from "@/utils/formatDateTime";
 import axios from "axios";
 import { usePathname, useRouter } from "next/navigation";
@@ -219,50 +219,50 @@ export default function Profiles() {
 
 
                     // * edit name chatroom
-                    const [activeEdit, setActiveEdit] = useState<number | null>(null)
-                    const [topicEdit, setTopicEdit] = useState<string | null>(null)
+                    // const [activeEdit, setActiveEdit] = useState<number | null>(null)
+                    // const [topicEdit, setTopicEdit] = useState<string | null>(null)
 
-                    const submitEditTopic = async () => {
-                        if (topicEdit === null || activeEdit === null) return
-                        const payload = {
-                            id: activeEdit,
-                            name: topicEdit,
-                            user: userData?.id
-                        }
-                        setActiveEdit(null)
-                        setTopicEdit(null)
+                    // const submitEditTopic = async () => {
+                    //     if (topicEdit === null || activeEdit === null) return
+                    //     const payload = {
+                    //         id: activeEdit,
+                    //         name: topicEdit,
+                    //         user: userData?.id
+                    //     }
+                    //     setActiveEdit(null)
+                    //     setTopicEdit(null)
 
-                        try {
-                            const res = await axios.put('/api/dashboard/chats/edit', payload)
-                            const resData = res.data
+                    //     try {
+                    //         const res = await axios.put('/api/dashboard/chats/edit', payload)
+                    //         const resData = res.data
 
-                            if (resData.status === 1) {
-                                setUserData(prev => {
-                                    if (!prev) return prev
-                                    return {
-                                        ...prev,
-                                        chatData: prev.chatData?.map(chat => 
-                                            chat.id === activeEdit ? { ...chat, name: payload.name, updatedAt: new Date().toISOString() } : chat
-                                        )
-                                    }
-                                })
-                            }
-                        } catch (error: unknown) {
-                            if (!axios.isAxiosError(error)) return
-                            const errorMessage = error.response?.data?.message
-                            setArlertMessage({
-                                color: false,
-                                message: errorMessage
-                            })
-                            const timeOutAPI = setTimeout(() => {
-                                setArlertMessage({
-                                    color: false,
-                                    message: ""
-                                })
-                            }, 6000)
-                            return () => clearTimeout(timeOutAPI)
-                        }
-                    }
+                    //         if (resData.status === 1) {
+                    //             setUserData(prev => {
+                    //                 if (!prev) return prev
+                    //                 return {
+                    //                     ...prev,
+                    //                     chatData: prev.chatData?.map(chat => 
+                    //                         chat.id === activeEdit ? { ...chat, name: payload.name, updatedAt: new Date().toISOString() } : chat
+                    //                     )
+                    //                 }
+                    //             })
+                    //         }
+                    //     } catch (error: unknown) {
+                    //         if (!axios.isAxiosError(error)) return
+                    //         const errorMessage = error.response?.data?.message
+                    //         setArlertMessage({
+                    //             color: false,
+                    //             message: errorMessage
+                    //         })
+                    //         const timeOutAPI = setTimeout(() => {
+                    //             setArlertMessage({
+                    //                 color: false,
+                    //                 message: ""
+                    //             })
+                    //         }, 6000)
+                    //         return () => clearTimeout(timeOutAPI)
+                    //     }
+                    // }
 
 
         const data = userData?.chatData ?? []
@@ -274,7 +274,7 @@ export default function Profiles() {
                         <span className="chatroom-id">#{row.original.id}</span>
                         <div className="chatroom-data">
                             <div className="chatroom-detail">
-                                { activeEdit === row.original.id ? (
+                                {/* { activeEdit === row.original.id ? (
                                     <div className="chatroom-edit">
                                         <input 
                                             type="text"
@@ -307,14 +307,15 @@ export default function Profiles() {
                                     }}>
                                         {row.original.name}
                                     </h1>
-                                }
+                                } */}
+                                <h1>{row.original.name}</h1>
                                 <p>{row.original.count} คำถาม</p>
                             </div>
                             <div className="chatroom-date">
                                 <span>อัปเดตเมื่อ {FormatDateTime(row.original.updatedAt)}</span>
                                 <span>สร้างเมื่อ {FormatDateTime(row.original.createdAt)}</span>
                             </div>
-                            { !activeEdit && (
+                            {/* { !activeEdit && (
                                 <button 
                                     type="button" 
                                     className="edit-chatroom-name"
@@ -325,7 +326,7 @@ export default function Profiles() {
                                     }}>
                                         <Pencil size={15}/>
                                 </button>
-                            )}
+                            )} */}
                         </div>
                     </div>
                 )

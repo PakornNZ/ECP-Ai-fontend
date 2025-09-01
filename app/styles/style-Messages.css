@@ -2,7 +2,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -45%);
+    transform: translate(-50%, -30%);
     opacity: 0;
     visibility: hidden;
 
@@ -13,7 +13,7 @@
     z-index: 2;
     opacity: 1;
     visibility: visible;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -35%);
 }
 
 .upload-fade {
@@ -46,7 +46,7 @@
     position: relative;
     width: 760px;
     min-height: 300px;
-    max-height: 600px;
+    max-height: 500px;
     padding: 10px;
     border-radius: 8px;
 }
@@ -101,7 +101,7 @@
     margin: auto;
 }
 
-.delete-msg button {
+.delete-msg .delete-msg-button {
     all: unset;
     display: flex;
     align-items: center;
@@ -113,8 +113,8 @@
     transition: all 0.3s ease-in-out;
 }
 
-.delete-msg button:hover {
-    background: var(--object-secondary-fade);
+.delete-msg .delete-msg-button:hover {
+    background: var(--object);
 }
 
 .close-upload {
@@ -130,6 +130,7 @@
     padding: 5px;
     border-radius: 50%;
     background: var(--object);
+    box-shadow: 0 0 0 1px var(--stroke);
 }
 
 .close-upload button svg {
@@ -148,5 +149,6 @@
 
     .msg-history {
         width: 85vw;
+        max-height: 60dvh;
     }
 }

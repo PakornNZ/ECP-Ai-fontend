@@ -24,7 +24,7 @@
     background: var(--object);
     box-shadow: 0 0 0 1px var(--object-fade);
     border-radius: 5px;
-    padding: 5px 8px;
+    padding: 8px;
 }
 
 .profile-chat-header span {

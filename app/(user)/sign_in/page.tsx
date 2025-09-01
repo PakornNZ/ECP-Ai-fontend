@@ -61,9 +61,9 @@ function SingIn() {
 
     const { data: session } = useSession()
     useEffect(() => {
-        if(session) {
-            router.push("/")
-        }
+        // if(session) {
+        //     router.push("/")
+        // }
     }, [session, router])
 
 
@@ -121,6 +121,12 @@ function SingIn() {
                 color: true,
                 message: ""
             })
+
+
+
+    // useEffect(() => {
+
+    // }, [allowUser])
 
                     const [submitUser, setSubmitUser] = useState<boolean>(false)
                     const submitLogin = async () => {
@@ -233,6 +239,9 @@ function SingIn() {
                         }
                     }
 
+
+
+                    // * Login with Google and Line
                     const [AllowAccount, setAllowAccount] = useState<boolean>(false)
                     const LoginGoogle = async () => {
                         setAllowAccount(true)
@@ -251,6 +260,9 @@ function SingIn() {
                             setAllowAccount(false)
                         }
                     }
+
+
+
 
                     const searchParams = useSearchParams()
                     useEffect(() => {
@@ -272,6 +284,7 @@ function SingIn() {
                         return () => clearTimeout(timeOutAPI)
                     }, [searchParams])
 
+                    
                     
                         const [arlertEmail, setArlertEmail] = useState<string>("")
                         

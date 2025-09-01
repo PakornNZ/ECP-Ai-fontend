@@ -1,12 +1,12 @@
 'use client'
 import Loading from '@/app/components/dashboard/LoadingFull'
 import MarkdownRenderer from '@/app/components/MarkdownRenderer'
-import { Arlert, DeleteTable, EditChats } from '@/app/components/object/object'
+import { Arlert } from '@/app/components/object/object'
 import '@/app/styles/style-Profile-Chat.css'
 import { decrypt } from '@/utils/crypto'
 import { FormatDateTime } from '@/utils/formatDateTime'
 import axios from 'axios'
-import { Heart, Settings, Trash2 } from 'lucide-react'
+import { Heart } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
@@ -31,18 +31,18 @@ interface ChatDataProps {
     messageData: MessageProps[]
 }
 
-interface ChatProps {
-    id: number
-    name: string
-    count: number
-    user: number
-    updatedAt: string
-    createdAt: string
-}
+// interface ChatProps {
+//     id: number
+//     name: string
+//     count: number
+//     user: number
+//     updatedAt: string
+//     createdAt: string
+// }
 
 export default function ProfileChat() {
     const [chatData, setChatData] = useState<ChatDataProps | null>(null)
-    const [chat, setChat] = useState<ChatProps | null>(null)
+    // const [chat, setChat] = useState<ChatProps | null>(null)
     const [chatId, setChatId] = useState<number | null>(null)
 
     const msgSectionRef = useRef<HTMLDivElement>(null)
@@ -92,7 +92,7 @@ export default function ProfileChat() {
 
                     if(resData.status === 1) {
                         setChatData(resData.data)
-                        setChat(resData.data)
+                        // setChat(resData.data)
                         setLoading(false)
                     }
                 } catch (error: unknown) {
@@ -116,134 +116,134 @@ export default function ProfileChat() {
 
         
         
-        const [editingRow, setEditingRow] = useState<number | null>(null)
-        const [editForm, setEditForm] = useState<Partial<ChatProps>>({})
+        // const [editingRow, setEditingRow] = useState<number | null>(null)
+        // const [editForm, setEditForm] = useState<Partial<ChatProps>>({})
 
-        const handleRowEdit = (row: ChatProps | null) => {
-            if (row === null) {
-                setEditingRow(null)
-                setEditForm({})
-            } else {
-                setEditingRow(row.id)
-                setEditForm(row)
-            }
-        }
+        // const handleRowEdit = (row: ChatProps | null) => {
+        //     if (row === null) {
+        //         setEditingRow(null)
+        //         setEditForm({})
+        //     } else {
+        //         setEditingRow(row.id)
+        //         setEditForm(row)
+        //     }
+        // }
         
         // * แก้ไขข้อมูล
-        const handleSaveEditChat = async (data: Partial<ChatProps>) => {
-            if (!data) return
-            setEditForm({})
+        // const handleSaveEditChat = async (data: Partial<ChatProps>) => {
+        //     if (!data) return
+        //     setEditForm({})
 
-            const payload = {
-                id: data.id,
-                name: data.name,
-                user: data.user
-            }
+        //     const payload = {
+        //         id: data.id,
+        //         name: data.name,
+        //         user: data.user
+        //     }
 
-            try {
-                const res = await axios.put('/api/dashboard/chats/edit', payload)
-                const resData = res.data
+        //     try {
+        //         const res = await axios.put('/api/dashboard/chats/edit', payload)
+        //         const resData = res.data
 
-                if (resData.status === 1) {
-                    setChatData(prev => {
-                        if (!prev) return null
-                        return {
-                            ...prev,
-                            name: payload.name || prev.name
-                        }
-                    })
+        //         if (resData.status === 1) {
+        //             setChatData(prev => {
+        //                 if (!prev) return null
+        //                 return {
+        //                     ...prev,
+        //                     name: payload.name || prev.name
+        //                 }
+        //             })
 
-                    setChat(prev => {
-                        if (!prev) return null
-                        return {
-                            ...prev,
-                            name: payload.name || prev.name
-                        }
-                    })
+        //             setChat(prev => {
+        //                 if (!prev) return null
+        //                 return {
+        //                     ...prev,
+        //                     name: payload.name || prev.name
+        //                 }
+        //             })
 
-                    setEditingRow(null)
-                }
-            } catch (error: unknown) {
-                if (!axios.isAxiosError(error)) return
-                const errorMessage = error.response?.data?.message
-                setArlertMessage({
-                    color: false,
-                    message: errorMessage
-                })
-                const timeOutAPI = setTimeout(() => {
-                    setArlertMessage({
-                        color: false,
-                        message: ""
-                    })
-                }, 6000)
-                return () => clearTimeout(timeOutAPI)
-            }
-        }
+        //             setEditingRow(null)
+        //         }
+        //     } catch (error: unknown) {
+        //         if (!axios.isAxiosError(error)) return
+        //         const errorMessage = error.response?.data?.message
+        //         setArlertMessage({
+        //             color: false,
+        //             message: errorMessage
+        //         })
+        //         const timeOutAPI = setTimeout(() => {
+        //             setArlertMessage({
+        //                 color: false,
+        //                 message: ""
+        //             })
+        //         }, 6000)
+        //         return () => clearTimeout(timeOutAPI)
+        //     }
+        // }
 
         // * ลบห้องแชท
-        const [deleteData, setDeleteData] = useState<number | null>(null)
+        // const [deleteData, setDeleteData] = useState<number | null>(null)
 
-        const onSubmitDelete = async (id: number | null) => {
-            if (!id) return
-            setDeleteData(null)
+        // const onSubmitDelete = async (id: number | null) => {
+        //     if (!id) return
+        //     setDeleteData(null)
             
-            try {
-                const res = await axios.delete('/api/dashboard/messages/delete', { data: id })
-                const resData = res.data
+        //     try {
+        //         const res = await axios.delete('/api/dashboard/messages/delete', { data: id })
+        //         const resData = res.data
 
-                if (resData.status === 1) {
-                    setChatData(prev => {
-                        if (!prev) return prev
-                        return {
-                            ...prev,
-                            messageData: prev.messageData.filter((row) => row.id !== id)
-                        }
-                    })
-                }
-            } catch (error: unknown) {
-                if (!axios.isAxiosError(error)) return
-                const errorMessage = error.response?.data?.message
-                setArlertMessage({
-                    color: false,
-                    message: errorMessage
-                })
-                const timeOutAPI = setTimeout(() => {
-                    setArlertMessage({
-                        color: false,
-                        message: ""
-                    })
-                }, 6000)
-                return () => clearTimeout(timeOutAPI)
-            }
-        }
+        //         if (resData.status === 1) {
+        //             setChatData(prev => {
+        //                 if (!prev) return prev
+        //                 return {
+        //                     ...prev,
+        //                     messageData: prev.messageData.filter((row) => row.id !== id)
+        //                 }
+        //             })
+        //         }
+        //     } catch (error: unknown) {
+        //         if (!axios.isAxiosError(error)) return
+        //         const errorMessage = error.response?.data?.message
+        //         setArlertMessage({
+        //             color: false,
+        //             message: errorMessage
+        //         })
+        //         const timeOutAPI = setTimeout(() => {
+        //             setArlertMessage({
+        //                 color: false,
+        //                 message: ""
+        //             })
+        //         }, 6000)
+        //         return () => clearTimeout(timeOutAPI)
+        //     }
+        // }
 
-        const onSubmitDeleteChat = async (id: number | null) => {
-            if (!id) return
-            setDeleteData(null)
+        // const onSubmitDeleteChat = async (id: number | null) => {
+        //     if (!id) return
+        //     setDeleteData(null)
             
-            try {
-                const res = await axios.delete('/api/dashboard/chats/delete', { data: id })
-                const resData = res.data
+        //     try {
+        //         const res = await axios.delete('/api/dashboard/chats/delete', { data: id })
+        //         const resData = res.data
 
-                if (resData.status === 1) {
-                    router.back()
-                }
-            } catch (error: unknown) {
-                if (!axios.isAxiosError(error)) return
-                const errorMessage = error.response?.data?.message
-                setArlertMessage({
-                    color: false,
-                    message: errorMessage
-                })
-                const timeOutAPI = setTimeout(() => {
-                    setArlertMessage({
-                        color: false,
-                        message: ""
-                    })
-                }, 6000)
-                return () => clearTimeout(timeOutAPI)
-            }
-        }
+        //         if (resData.status === 1) {
+        //             router.back()
+        //         }
+        //     } catch (error: unknown) {
+        //         if (!axios.isAxiosError(error)) return
+        //         const errorMessage = error.response?.data?.message
+        //         setArlertMessage({
+        //             color: false,
+        //             message: errorMessage
+        //         })
+        //         const timeOutAPI = setTimeout(() => {
+        //             setArlertMessage({
+        //                 color: false,
+        //                 message: ""
+        //             })
+        //         }, 6000)
+        //         return () => clearTimeout(timeOutAPI)
+        //     }
+        // }
 
     
     if (loading) {
@@ -256,31 +256,31 @@ export default function ProfileChat() {
     }
     return (
         <>
-            <EditChats
+            {/* <EditChats
                 editingRow={editingRow}
                 activeEditingRow={setEditingRow}
                 editForm={editForm}
                 activeSaveForm={handleSaveEditChat}
                 onSubmitDelete={onSubmitDeleteChat}
-            />
+            /> */}
             <div className="profile-chat-container">
                 <div className="profile-chat-bg">
                     <div className="profile-chat-header">
                         <span>#{chatData?.id}</span>
                         <p>{chatData?.name}</p>
-                        <div className='profile-chat-delete'>
+                        {/* <div className='profile-chat-delete'>
                             <button type="button" onClick={() => {
                                     handleRowEdit(chat)
                                 }}>
                                     <Settings size={16}/>
                             </button>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="profile-chat-section" ref={msgSectionRef}>
                         {chatData?.messageData.map((msg, index) => (
                             <div className="profile-message-bubble" key={index}>
                                 <div className="profile-query-bubble">
-                                    <div className='profile-query-config'>
+                                    {/* <div className='profile-query-config'>
                                         <div className='profile-query-delete'>
                                             <button 
                                                 type="button"
@@ -295,8 +295,8 @@ export default function ProfileChat() {
                                                     onSubmit={onSubmitDelete}/>
                                             )}
                                         </div>
-                                        <span>{msg.query}</span>
-                                    </div>
+                                    </div> */}
+                                    <span>{msg.query}</span>
                                     <div className='profile-query-detail'>
                                         { msg.rating !== 0 &&
                                             <div className='profile-query-rating'>

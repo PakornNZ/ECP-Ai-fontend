@@ -10,9 +10,9 @@ import {
     getFilteredRowModel,
     FilterFn
 } from "@tanstack/react-table"
-import { ChevronDown, Trash2, X } from "lucide-react"
+import { ChevronDown, X } from "lucide-react"
 import { useEffect, useMemo, useRef, useState } from "react"
-import { Arlert, CustomDropdown, DeleteTable } from "@/app/components/object/object"
+import { CustomDropdown } from "@/app/components/object/object"
 import Tables from "@/app/components/dashboard/table"
 import "@/app/styles/style-Messages.css"
 import MarkdownRenderer from "@/app/components/MarkdownRenderer"
@@ -50,45 +50,45 @@ export default function Messages() {
     const [isCompact, setIsCompact] = useState(false)
 
     // * ข้อความแจ้งเตือน
-    const [arlertMessage, setArlertMessage] = useState({
-        color: true,
-        message: ""
-    })
+    // const [arlertMessage, setArlertMessage] = useState({
+    //     color: true,
+    //     message: ""
+    // })
 
                                     // * ลบข้อมูล
-                                    const [confirmDelete, setConfirmDelete] = useState<number | null>(null)
+                                    // const [confirmDelete, setConfirmDelete] = useState<number | null>(null)
                                     
-                                    const submitDeleteData = async (id: number | null) => {
-                                        if (!id) return
-                                        setConfirmDelete(null)
+                                    // const submitDeleteData = async (id: number | null) => {
+                                    //     if (!id) return
+                                    //     setConfirmDelete(null)
                                         
-                                        try {
-                                            const res = await axios.delete('/api/dashboard/messages/delete', { data: id })
-                                            const resData = res.data
+                                    //     try {
+                                    //         const res = await axios.delete('/api/dashboard/messages/delete', { data: id })
+                                    //         const resData = res.data
 
-                                            if (resData.status === 1) {
-                                                setActiveRow(null)
-                                                setMsgData((prev) => {
-                                                    if (!prev) return prev
-                                                    return prev.filter((row) => row.id !== id)
-                                                })
-                                            }
-                                        } catch (error: unknown) {
-                                            if (!axios.isAxiosError(error)) return
-                                            const errorMessage = error.response?.data?.message
-                                            setArlertMessage({
-                                                color: false,
-                                                message: errorMessage
-                                            })
-                                            const timeOutAPI = setTimeout(() => {
-                                                setArlertMessage({
-                                                    color: false,
-                                                    message: ""
-                                                })
-                                            }, 6000)
-                                            return () => clearTimeout(timeOutAPI)
-                                        }
-                                    }
+                                    //         if (resData.status === 1) {
+                                    //             setActiveRow(null)
+                                    //             setMsgData((prev) => {
+                                    //                 if (!prev) return prev
+                                    //                 return prev.filter((row) => row.id !== id)
+                                    //             })
+                                    //         }
+                                    //     } catch (error: unknown) {
+                                    //         if (!axios.isAxiosError(error)) return
+                                    //         const errorMessage = error.response?.data?.message
+                                    //         setArlertMessage({
+                                    //             color: false,
+                                    //             message: errorMessage
+                                    //         })
+                                    //         const timeOutAPI = setTimeout(() => {
+                                    //             setArlertMessage({
+                                    //                 color: false,
+                                    //                 message: ""
+                                    //             })
+                                    //         }, 6000)
+                                    //         return () => clearTimeout(timeOutAPI)
+                                    //     }
+                                    // }
 
 
 
@@ -306,10 +306,10 @@ export default function Messages() {
         setActiveRow(null)
     })
 
-    const deleteRef = useRef<HTMLDivElement | null>(null)
-    useOnClickOutside(deleteRef, () => {
-        setConfirmDelete(null)
-    })
+    // const deleteRef = useRef<HTMLDivElement | null>(null)
+    // useOnClickOutside(deleteRef, () => {
+    //     setConfirmDelete(null)
+    // })
 
 
 
@@ -335,7 +335,7 @@ export default function Messages() {
 
     return (
         <>
-            <Arlert messageArlert={arlertMessage} />
+            {/* <Arlert messageArlert={arlertMessage} /> */}
             <div className={`data-container ${isCompact ? 'table-layout' : ''}`}>
                 <div className={`msg-history-section ${activeRow ? 'show' : ''}`} ref={msgRef}>
                     <div className="msg-history-bg">
@@ -358,9 +358,10 @@ export default function Messages() {
                                 <span><MarkdownRenderer content={activeRow?.answer || ''}/></span>
                             </div>
                         </div>
-                        <div className="delete-msg">
+                        {/* <div className="delete-msg">
                             <button 
                                 type="button"
+                                className="delete-msg-button"
                                 onClick={() => {
                                     if (!activeRow?.id) return
                                     setConfirmDelete(activeRow?.id)
@@ -374,7 +375,7 @@ export default function Messages() {
                                     onCancel={setConfirmDelete}
                                     onSubmit={submitDeleteData}/>
                             )}
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 { activeRow && <div className="upload-fade" /> }

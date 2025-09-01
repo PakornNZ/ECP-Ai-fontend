@@ -10,10 +10,10 @@ import {
     getFilteredRowModel,
     FilterFn
 } from "@tanstack/react-table"
-import { ChevronDown, Settings, X } from "lucide-react"
+import { ChevronDown, X } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import Tables from "@/app/components/dashboard/table"
-import { Arlert, EditChats } from "@/app/components/object/object"
+// import { Arlert } from "@/app/components/object/object"
 import { FormatDateTime } from "@/utils/formatDateTime"
 import axios from "axios"
 import { useQuery } from "@tanstack/react-query"
@@ -46,97 +46,97 @@ export default function Chats() {
     ])
 
     // * ข้อความแจ้งเตือน
-    const [arlertMessage, setArlertMessage] = useState({
-        color: true,
-        message: ""
-    })
+    // const [arlertMessage, setArlertMessage] = useState({
+    //     color: true,
+    //     message: ""
+    // })
 
                                     // * แก้ไขข้อมูล
-                                    const [editingRow, setEditingRow] = useState<number | null>(null)
-                                    const [editForm, setEditForm] = useState<Partial<ChatProps>>({})
+                                    // const [editingRow, setEditingRow] = useState<number | null>(null)
+                                    // const [editForm, setEditForm] = useState<Partial<ChatProps>>({})
 
-                                    const handleRowEdit = (row: ChatProps | null) => {
-                                        if (row === null) {
-                                            setEditingRow(null)
-                                            setEditForm({})
-                                        } else {
-                                            setEditingRow(row.id)
-                                            setEditForm(row)
-                                        }
-                                    }
+                                    // const handleRowEdit = (row: ChatProps | null) => {
+                                    //     if (row === null) {
+                                    //         setEditingRow(null)
+                                    //         setEditForm({})
+                                    //     } else {
+                                    //         setEditingRow(row.id)
+                                    //         setEditForm(row)
+                                    //     }
+                                    // }
 
-                                    const handleSaveEditChat = async (data: Partial<ChatProps>) => {
-                                        if (!data) return
-                                        setEditingRow(null)
-                                        setEditForm({})
+                                    // const handleSaveEditChat = async (data: Partial<ChatProps>) => {
+                                    //     if (!data) return
+                                    //     setEditingRow(null)
+                                    //     setEditForm({})
 
-                                        const payload = {
-                                            id: data.id,
-                                            name: data.name,
-                                            user: data.user
-                                        }
+                                    //     const payload = {
+                                    //         id: data.id,
+                                    //         name: data.name,
+                                    //         user: data.user
+                                    //     }
 
-                                        try {
-                                            const res = await axios.put('/api/dashboard/chats/edit', payload)
-                                            const resData = res.data
+                                    //     try {
+                                    //         const res = await axios.put('/api/dashboard/chats/edit', payload)
+                                    //         const resData = res.data
 
-                                            if (resData.status === 1) {
-                                                data.updatedAt = new Date().toISOString()
+                                    //         if (resData.status === 1) {
+                                    //             data.updatedAt = new Date().toISOString()
                                                 
-                                                setChatData(prev => 
-                                                    prev.map(chat => 
-                                                        chat.id === editingRow ? { ...chat, ...data } : chat
-                                                    )
-                                                )
-                                            }
-                                        } catch (error: unknown) {
-                                            if (!axios.isAxiosError(error)) return
-                                            const errorMessage = error.response?.data?.message
-                                            setArlertMessage({
-                                                color: false,
-                                                message: errorMessage
-                                            })
-                                            const timeOutAPI = setTimeout(() => {
-                                                setArlertMessage({
-                                                    color: false,
-                                                    message: ""
-                                                })
-                                            }, 6000)
-                                            return () => clearTimeout(timeOutAPI)
-                                        }
-                                    }
+                                    //             setChatData(prev => 
+                                    //                 prev.map(chat => 
+                                    //                     chat.id === editingRow ? { ...chat, ...data } : chat
+                                    //                 )
+                                    //             )
+                                    //         }
+                                    //     } catch (error: unknown) {
+                                    //         if (!axios.isAxiosError(error)) return
+                                    //         const errorMessage = error.response?.data?.message
+                                    //         setArlertMessage({
+                                    //             color: false,
+                                    //             message: errorMessage
+                                    //         })
+                                    //         const timeOutAPI = setTimeout(() => {
+                                    //             setArlertMessage({
+                                    //                 color: false,
+                                    //                 message: ""
+                                    //             })
+                                    //         }, 6000)
+                                    //         return () => clearTimeout(timeOutAPI)
+                                    //     }
+                                    // }
 
                                     // * ลบข้อมูล
-                                    const submitDeleteData = async (id: number | null) => {
-                                        if (!id) return
-                                        setEditingRow(null)
+                                    // const submitDeleteData = async (id: number | null) => {
+                                    //     if (!id) return
+                                    //     setEditingRow(null)
                                         
-                                        try {
-                                            const res = await axios.delete('/api/dashboard/chats/delete', { data: id })
-                                            const resData = res.data
+                                    //     try {
+                                    //         const res = await axios.delete('/api/dashboard/chats/delete', { data: id })
+                                    //         const resData = res.data
 
-                                            if (resData.status === 1) {
-                                                setChatData((prev) => {
-                                                    if (!prev) return prev
-                                                    return prev.filter((row) => row.id !== id)
-                                                })
-                                            }
-                                        } catch (error: unknown) {
-                                            if (!axios.isAxiosError(error)) return
-                                            const errorMessage = error.response?.data?.message
-                                            setArlertMessage({
-                                                color: false,
-                                                message: errorMessage
-                                            })
-                                            const timeOutAPI = setTimeout(() => {
-                                                setArlertMessage({
-                                                    color: false,
-                                                    message: ""
-                                                })
-                                            }, 6000)
-                                            return () => clearTimeout(timeOutAPI)
-                                        }
-                                    }
+                                    //         if (resData.status === 1) {
+                                    //             setChatData((prev) => {
+                                    //                 if (!prev) return prev
+                                    //                 return prev.filter((row) => row.id !== id)
+                                    //             })
+                                    //         }
+                                    //     } catch (error: unknown) {
+                                    //         if (!axios.isAxiosError(error)) return
+                                    //         const errorMessage = error.response?.data?.message
+                                    //         setArlertMessage({
+                                    //             color: false,
+                                    //             message: errorMessage
+                                    //         })
+                                    //         const timeOutAPI = setTimeout(() => {
+                                    //             setArlertMessage({
+                                    //                 color: false,
+                                    //                 message: ""
+                                    //             })
+                                    //         }, 6000)
+                                    //         return () => clearTimeout(timeOutAPI)
+                                    //     }
+                                    // }
 
 
                         // * ดึงข้อมูล
@@ -218,16 +218,16 @@ export default function Chats() {
             accessorKey: 'actions',
             header: '',
             enableSorting: false,
-            cell: ({ row }) => (
-                <div className="action-section">
-                    <button type="button" onClick={(e) => {
-                            handleRowEdit(row.original)
-                            e.stopPropagation()
-                        }}>
-                            <Settings />
-                    </button>
-                </div>
-            )
+            // cell: ({ row }) => (
+            //     <div className="action-section">
+            //         <button type="button" onClick={(e) => {
+            //                 handleRowEdit(row.original)
+            //                 e.stopPropagation()
+            //             }}>
+            //                 <Settings />
+            //         </button>
+            //     </div>
+            // )
         }
     ]
 
@@ -351,14 +351,14 @@ export default function Chats() {
 
     return (
         <>
-            <Arlert messageArlert={arlertMessage} />
-            <EditChats
+            {/* <Arlert messageArlert={arlertMessage} /> */}
+            {/* <EditChats
                 editingRow={editingRow}
                 activeEditingRow={setEditingRow}
                 editForm={editForm}
                 activeSaveForm={handleSaveEditChat}
                 onSubmitDelete={submitDeleteData}
-            />
+            /> */}
             <div className={`data-container ${isCompact ? 'table-layout' : ''}`}>
                 <div className="table-header">
                     <div className="table-search">
@@ -419,7 +419,7 @@ export default function Chats() {
                 ) : (
                     <Tables
                         tableInfo={tableInfo}
-                        handleRowEdit={handleRowEdit}
+                        // handleRowEdit={handleRowEdit}
                         tableCount={tableInfo.getPrePaginationRowModel().rows.length}
                         onActiveRow={handleActiveRow}
                         isRefetch={setActiveLoading}

@@ -302,7 +302,8 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 14px;
+    font-size: 5px;
+    opacity: 0;
     font-family: var(--font-Notosans);
     color: var(--color-font);
     padding: 3px 0;

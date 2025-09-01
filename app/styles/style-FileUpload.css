@@ -124,6 +124,10 @@
     justify-content: center;
 }
 
+.chunks-list button .select {
+    background: var(--object-fade);
+}
+
 .upload {
     z-index: 0;
     width: 100%;
@@ -228,7 +232,8 @@
     display: flex;
     padding: 5px;
     border-radius: 50%;
-    background: var(--object-fade);
+    background: var(--object);
+    box-shadow: 0 0 0 1px var(--stroke);
 }
 
 .close-upload button svg {
@@ -236,7 +241,7 @@
 }
 
 .close-upload button:hover {
-    background: var(--object);
+    background: var(--object-fade);
 }
 
 .file-page-input {
