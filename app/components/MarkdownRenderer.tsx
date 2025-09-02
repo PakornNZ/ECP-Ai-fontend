@@ -119,7 +119,7 @@ export default function MarkdownRenderer({ content }: { content: string }) {
                     return <table className="section-table">{children}</table>
                 },
                 a({ href, children }) {
-                    return <a className='section-a' href={href}>{children}</a>
+                    return <a className='section-a' href={href} target="_blank" rel="noopener noreferrer">{children}</a>
                 }
             }}
         >
