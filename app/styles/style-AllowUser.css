@@ -67,7 +67,7 @@
     font-weight: 500;
 }
 
-.allow-user-bg .allow-user-button {
+.allow-user-button-container button {
     all: unset;
     cursor: pointer;
     display: flex;
@@ -77,47 +77,39 @@
     width: 50%;
     height: 40px;
     border-radius: 8px;
-    background: var(--color-main);
-    color: var(--color-font-white);
     font-size: 16px;
     font-weight: 500;
     margin: auto;
     margin-bottom: 5px;
-
-    transition: background 0.3s ease-in-out;
+    
+    /* transition: background 0.3s ease-in-out; */
 }
 
-.allow-user-bg .allow-user-button:hover {
+.allow-user-button-container .allow-user-button {
+    background: var(--color-main);
+    color: var(--color-font-white);
+}
+
+/* .allow-user-button:hover {
     background: var(--color-main-fade);
-}
+} */
 
-.allow-user-bg .allow-user-close {
-    all: unset;
-    cursor: pointer;
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 3px;
-    background: var(--object);
-    border-radius: 50%;
-    box-shadow: 0 0 0 1px var(--stroke);
-
-    transition: background 0.3s ease-in-out;
-}
-
-.allow-user-bg .allow-user-close svg {
-    width: 20px;
-    height: 20px;
+.allow-user-button-container .refuse-user-button {
+    background: var(--object-fade);
     color: var(--color-font);
 }
 
-.allow-user-bg .allow-user-close:hover {
-    background: var(--object-fade);
+/* .refuse-user-button:hover {
+    background: var(--object);
+} */
+
+.allow-user-button-container {
+    width: 70%;
+    display: flex;
+    gap: 15px;
 }
+
+
 
 @media (max-width: 768px) {
     .allow-user-bg {
