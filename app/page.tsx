@@ -218,7 +218,6 @@ export default function Homepage() {
                   if (!chatId) {
                     setStartNewChat(true)
                     const chat_id = await submitQueryNewChat()
-                    CreateTopicChat(chat_id, querySend)
                     const newMessage: MessageProps = {
                       id: null,
                       query: querySend,
@@ -227,8 +226,8 @@ export default function Homepage() {
                     }
                     setMessage( prev => prev ? [...prev, newMessage] : [newMessage])
                     setIsLoading(true)
-
-                    responseAnsewer(chat_id, querySend)
+                    await responseAnsewer(chat_id, querySend)
+                    CreateTopicChat(chat_id, querySend)
                   } else {
                     const newMessage: MessageProps = {
                       id: null,
@@ -260,10 +259,11 @@ export default function Homepage() {
                                         const resData = res.data
 
                                         if (resData.status === 1) {
-                                          setChatId(resData.data.chat_id)
-                                          const encodeChatId = encodeURIComponent(await encrypt(resData.data.chat_id))
+                                          setChatId(resData.data.id)
+                                          setTopic(resData.data)
+                                          const encodeChatId = encodeURIComponent(await encrypt(resData.data.id))
                                           window.history.pushState({}, '', `/chats/${encodeChatId}`)
-                                          return resData.data.chat_id
+                                          return resData.data.id
                                         }
                                       } catch (error: unknown) {
                                         if (!axios.isAxiosError(error)) return

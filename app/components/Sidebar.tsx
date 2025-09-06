@@ -92,12 +92,16 @@ export default function Sidebar({ isState, closeSidebar, ChatIdSelect, chatId, n
             useEffect(() => {
                 if (!newTopic) return
                 if (!chatHistory) {
-                    setChatHistory([newTopic])
-                } else {
                     setChatHistory((prev) => {
                         if (!prev) return [newTopic]
-                        const exists = prev.find((item) => item.id === newTopic.id)
-                        return exists ? prev : [newTopic, ...prev]
+                        const existsIndex = prev.findIndex((item) => item.id === newTopic.id)
+                        if (existsIndex === -1) {
+                            return [newTopic, ...prev]
+                        } else {
+                            const updated = [...prev]
+                            updated[existsIndex] = { ...prev[existsIndex], ...newTopic }
+                            return updated
+                        }
                     })
                 }
                 
