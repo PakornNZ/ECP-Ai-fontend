@@ -252,6 +252,7 @@ export default function Homepage() {
                     })
 
 
+                                    const [topic, setTopic] = useState<ChatHistoryProps | null>(null) 
                                     // * สร้างห้องแชทใหม่ ในครั้งแรก
                                     const submitQueryNewChat = async () => {
                                       try {
@@ -284,7 +285,6 @@ export default function Homepage() {
 
 
                                     // * ตั้งชื่อแชท
-                                    const [topic, setTopic] = useState<ChatHistoryProps | null>(null)
                                     const CreateTopicChat = (chat_id: number, querySend: string) => {
                                       const payload = {
                                         "chat_id": chat_id,

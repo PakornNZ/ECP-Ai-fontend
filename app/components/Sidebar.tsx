@@ -91,21 +91,18 @@ export default function Sidebar({ isState, closeSidebar, ChatIdSelect, chatId, n
             
             useEffect(() => {
                 if (!newTopic) return
-                if (!chatHistory) {
-                    setChatHistory((prev) => {
-                        if (!prev) return [newTopic]
-                        const existsIndex = prev.findIndex((item) => item.id === newTopic.id)
-                        if (existsIndex === -1) {
-                            return [newTopic, ...prev]
-                        } else {
-                            const updated = [...prev]
-                            updated[existsIndex] = { ...prev[existsIndex], ...newTopic }
-                            return updated
-                        }
-                    })
-                }
-                
-            }, [newTopic, chatHistory])
+                setChatHistory((prev) => {
+                    if (!prev) return [newTopic]
+                    const existsIndex = prev.findIndex((item) => item.id === newTopic.id)
+                    if (existsIndex === -1) {
+                        return [newTopic, ...prev]
+                    } else {
+                        const updated = [...prev]
+                        updated[existsIndex] = { ...prev[existsIndex], ...newTopic }
+                        return updated
+                    }
+                })
+            }, [newTopic])
 
             useEffect(() => {
                 setLoadingHistory(loading)
@@ -185,9 +182,9 @@ export default function Sidebar({ isState, closeSidebar, ChatIdSelect, chatId, n
 
             const submitDelete = async (chat_id: number) => {
                 if (!chat_id) return
-                setChatHistory((prev) => prev.filter((item) => item.id !== chat_id))           
                 try {
-                        await axios.put('/api/data/chat_delete', { chat_id })
+                    await axios.put('/api/data/chat_delete', { chat_id })
+                    setChatHistory((prev) => prev.filter((item) => item.id !== chat_id))
                 } catch (error: unknown) {
                     if (!axios.isAxiosError(error)) return
                     const errorMessage = error.response?.data?.message
@@ -202,7 +199,10 @@ export default function Sidebar({ isState, closeSidebar, ChatIdSelect, chatId, n
                         })
                     }, 6000)
                     return () => clearTimeout(timeOutAPI)
-                }  
+                } finally {
+                    setIsDelete(null)
+                    if (chat_id === activeChatId) router.push("/")
+                }
             }
 
     return (

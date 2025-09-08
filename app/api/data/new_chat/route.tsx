@@ -3,7 +3,7 @@ import { getToken } from "next-auth/jwt";
 import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
 
-const API = process.env.PRIVATE_API_CHAT
+const API = process.env.PRIVATE_API_DATA
 const secret = process.env.NEXTAUTH_SECRET
 export async function POST(req: NextRequest) {
     const token = await getToken({ req, secret })
