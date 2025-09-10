@@ -387,7 +387,7 @@ export default function Homepage() {
                             controllerRef.current.abort()
                             controllerRef.current = null
                           }
-                          setIsLoading(false)
+                          // setIsLoading(false)
                         }
 
 
@@ -593,7 +593,7 @@ export default function Homepage() {
                         value={query} 
                         onChange={hadleQuery}
                         onKeyDown={handleKeyDown}/>
-                    <button disabled={!sendButton && !isLoading} type="button"
+                    <button disabled={!sendButton} type="button"
                       onClick={() => {
                         if (isLoading) {
                           handleStopResponse()
