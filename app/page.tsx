@@ -334,7 +334,7 @@ export default function Homepage() {
                 }
                 setMessage( prev => prev ? [...prev, newMessage] : [newMessage])
                 setIsLoading(true)
-  
+                setSendButton(false)
                 try {
                   const res = await axios.post('/api/chat/guest_response', { querySend } )
                   const resData = res.data
@@ -370,7 +370,6 @@ export default function Homepage() {
                   return () => clearTimeout(timeOutAPI)
                 } finally {
                   setIsLoading(false)
-                  setSendButton(false)
                 }
               }
               
@@ -397,6 +396,7 @@ export default function Homepage() {
                                     "chat_id": chat_id,
                                     "query": querySend
                                   }
+                                  setSendButton(false)
                                   try {
                                     const res = await axios.post('/api/chat/response', payload )
                                     const resData = res.data
@@ -432,7 +432,6 @@ export default function Homepage() {
                                     return () => clearTimeout(timeOutAPI)
                                   } finally {
                                     setIsLoading(false)
-                                    setSendButton(false)
                                   }
                                 }
 

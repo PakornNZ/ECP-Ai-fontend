@@ -280,6 +280,7 @@ function SingIn() {
                                 color: false,
                                 message: ""
                             })
+                            window.history.pushState({}, '', '/sign_in')
                         }, 6000)
                         return () => clearTimeout(timeOutAPI)
                     }, [searchParams])
