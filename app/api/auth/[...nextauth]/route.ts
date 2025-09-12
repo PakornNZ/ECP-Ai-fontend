@@ -132,6 +132,8 @@ const handler = NextAuth({
     },
     pages: {
         signIn: '/sign_in',
+        signOut: '/',
+        error: '/sign_in'
     }
 })
 
