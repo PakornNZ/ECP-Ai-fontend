@@ -36,7 +36,7 @@ export default function Homepage() {
   const router = useRouter()
   // ! ข้อมูลผู้ใช้งาน
   const [chatId, setChatId] = useState<number | null>(null)
-  const [message, setMessage] = useState<MessageProps[] | null>(null)
+  const [message, setMessage] = useState<MessageProps[]>([])
 
   // ! ข้อมูลผู้มาเยือน
   const [guest, setGuest] = useState<boolean | null>(null)
@@ -103,7 +103,7 @@ export default function Homepage() {
 
   // * รับid จากsildbar
   const handleChatId = (chat_id: number) => {
-    setMessage(null)
+    setMessage([])
     get_chatRoom(chat_id)
   }
 
@@ -128,7 +128,7 @@ export default function Homepage() {
       setChatId(null)
       setQuery("")
       setSendButton(false)
-      setMessage(null)
+      setMessage([])
       setIsLoading(false)
       setGuest(null)
       setStartNewChat(false)
@@ -313,7 +313,7 @@ export default function Homepage() {
               const submitQueryGuest = async (querySend: string) => {
                 if (session) return
 
-                if (!message) {
+                if (!Array.isArray(message) || message.length === 0) {
                   setGuest(true)
                   const encodeURL = encodeURIComponent(await encryptURL('guest'))
                   window.history.pushState({}, '', `/guest/${encodeURL}`)
@@ -340,7 +340,7 @@ export default function Homepage() {
                   const resData = res.data
                   if (resData.status === 1) {
                     setMessage( prev => {
-                      if (!prev) return null
+                      if (!prev || prev.length === 0) return prev
   
                       const update = [...prev]
                       const lastIndex = update.length - 1
@@ -402,7 +402,7 @@ export default function Homepage() {
                                     const resData = res.data
                                     if (resData.status === 1) {
                                       setMessage( prev => {
-                                        if (!prev) return null
+                                        if (!prev || prev.length === 0) return prev
 
                                         const update = [...prev]
                                         const lastIndex = update.length - 1
@@ -592,7 +592,7 @@ export default function Homepage() {
                         value={query} 
                         onChange={hadleQuery}
                         onKeyDown={handleKeyDown}/>
-                    <button disabled={!sendButton} type="button"
+                    <button disabled={!sendButton || isLoading} type="button"
                       onClick={() => {
                         if (isLoading) {
                           handleStopResponse()

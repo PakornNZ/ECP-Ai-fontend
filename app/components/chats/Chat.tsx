@@ -17,7 +17,7 @@ interface Message {
     
 interface SectionProps {
     MoveSection: boolean
-    message: Message[] | null
+    message: Message[]
     isLoading: boolean
     onUpdateQuery: (id: number, newQuery: string) => void
     onUpdateAnswer: (id: number, newAnswer: string) => void
